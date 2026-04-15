@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { mockDevices } from "@/data/mockData";
 import type { GpsDevice } from "@/types";
-import { MapPin, Battery, Wifi, Radio, RefreshCw, Layers, ZoomIn, ZoomOut, ChevronRight } from "lucide-react";
+import { Radio, RefreshCw, Layers, ZoomIn, ZoomOut } from "lucide-react";
 
 const statusDot: Record<GpsDevice["status"], string> = {
   active: "bg-[#10B981]",

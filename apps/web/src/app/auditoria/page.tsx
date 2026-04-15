@@ -2,19 +2,17 @@
 
 import { useState } from "react";
 import { mockAuditEvents } from "@/data/mockData";
-import type { AuditEvent, AuditCategory } from "@/types";
+import type { AuditCategory } from "@/types";
 import {
   Search,
   Download,
   Filter,
-  User,
   LogIn,
   LogOut,
   Settings,
   Shield,
   AlertTriangle,
   CheckCircle2,
-  Clock,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";

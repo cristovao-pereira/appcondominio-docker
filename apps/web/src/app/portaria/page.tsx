@@ -6,14 +6,9 @@ import type { ActiveVisit } from "@/types";
 import {
   LogIn,
   LogOut,
-  Clock,
-  Shield,
   MapPin,
   Search,
-  Camera,
-  Car,
   Package,
-  User,
   CheckCircle2,
 } from "lucide-react";
 

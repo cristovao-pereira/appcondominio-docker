@@ -5,18 +5,10 @@ import { mockDevices } from "@/data/mockData";
 import type { GpsDevice } from "@/types";
 import {
   Radio,
-  Battery,
-  BatteryLow,
-  BatteryMedium,
-  BatteryFull,
   Wifi,
   WifiOff,
   RefreshCw,
   Plus,
-  Filter,
-  MoreHorizontal,
-  MapPin,
-  Clock,
   Zap,
 } from "lucide-react";
 

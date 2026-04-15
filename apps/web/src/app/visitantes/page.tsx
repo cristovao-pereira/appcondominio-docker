@@ -6,11 +6,6 @@ import type { Visitor } from "@/types";
 import {
   Search,
   Plus,
-  Phone,
-  Mail,
-  MoreHorizontal,
-  UserCheck,
-  Clock,
   Star,
   Filter,
 } from "lucide-react";

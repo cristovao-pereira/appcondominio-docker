@@ -8,11 +8,9 @@ import {
   CheckCircle2,
   XCircle,
   Clock,
-  Eye,
   Calendar,
   User,
   Building2,
-  ChevronRight,
 } from "lucide-react";
 
 const statusConfig: Record<Authorization["status"], { label: string; color: string; bg: string; icon: React.ElementType }> = {

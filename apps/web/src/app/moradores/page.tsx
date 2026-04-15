@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { mockResidents } from "@/data/mockData";
 import type { Resident } from "@/types";
-import { Search, Plus, Filter, Phone, Mail, MoreHorizontal, Shield } from "lucide-react";
+import { Search, Plus, Phone, Mail, MoreHorizontal, Shield } from "lucide-react";
 
 const statusConfig: Record<Resident["status"], { label: string; color: string; bg: string }> = {
   active: { label: "ACTIVE", color: "text-[#adc6ff]", bg: "bg-[#adc6ff]/10" },
