@@ -1,0 +1,159 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-manrope);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Concierge OS extended colors */
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-primary-container: var(--primary-container);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+}
+
+:root {
+  /* === Concierge OS / Midnight Slate Design System === */
+  /* Surfaces */
+  --surface: #0b1326;
+  --surface-dim: #090f1f;
+  --surface-bright: #1e2a3d;
+  --surface-container-low: #131b2e;
+  --surface-container: #171f33;
+  --surface-container-high: #222a3d;
+  --surface-container-highest: #2a3347;
+  /* Primary palette */
+  --primary-container: #4d8eff;
+  --on-primary: #0b1326;
+  --on-primary-container: #dae2fd;
+  /* Content colors */
+  --on-surface: #dae2fd;
+  --on-surface-variant: #c2c6d6;
+  --outline: #8c909f;
+  --outline-variant: #424754;
+  /* Semantic */
+  --tertiary: #ffb786;
+  --tertiary-container: #3d2100;
+  --on-tertiary-container: #ffdcbe;
+  /* === Shadcn variables mapped to Concierge OS palette === */
+  --background: #0b1326;
+  --foreground: #dae2fd;
+  --card: #171f33;
+  --card-foreground: #dae2fd;
+  --popover: #222a3d;
+  --popover-foreground: #dae2fd;
+  --primary: #adc6ff;
+  --primary-foreground: #0b1326;
+  --secondary: #171f33;
+  --secondary-foreground: #c2c6d6;
+  --muted: #131b2e;
+  --muted-foreground: #8c909f;
+  --accent: #222a3d;
+  --accent-foreground: #dae2fd;
+  --destructive: #ffb4ab;
+  --destructive-foreground: #0b1326;
+  --border: #424754;
+  --input: #2a3347;
+  --ring: #4d8eff;
+  --chart-1: #adc6ff;
+  --chart-2: #b1c6f9;
+  --chart-3: #4d8eff;
+  --chart-4: #ffb786;
+  --chart-5: #ffb4ab;
+  --radius: 0.625rem;
+  --sidebar: #0b1326;
+  --sidebar-foreground: #dae2fd;
+  --sidebar-primary: #adc6ff;
+  --sidebar-primary-foreground: #0b1326;
+  --sidebar-accent: #222a3d;
+  --sidebar-accent-foreground: #dae2fd;
+  --sidebar-border: #424754;
+  --sidebar-ring: #4d8eff;
+}
+
+/* === Custom Animations === */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px 0px rgb(173 198 255 / 0.3); }
+  50% { box-shadow: 0 0 24px 6px rgb(173 198 255 / 0.2); }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.status-pulse { animation: status-pulse 2s ease-in-out infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #424754; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #8c909f; }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  html {
+    @apply h-full;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+}
