@@ -135,15 +135,22 @@ export const mockAuditEvents: AuditEvent[] = [
   { id: "ae6", timestamp: "11:30:00", userInitials: "JA", userName: "James Aris", action: "Check-out Visitor", actionType: "check_out", condoUnit: "Unit 805", details: "Marcus Thompson exited lobby. GPS device returned." },
 ];
 
-// ─── Condominiums ─────────────────────────────────────────────────────────────
+// ─── Condominium (single) ─────────────────────────────────────────────────────
 
-export const mockCondos: Condo[] = [
-  { id: "c1", name: "The Zenith Plaza", type: "Residential Hub A", address: "402 Obsidian Ave, Downtown Core", neighborhood: "Downtown Core", unitCapacity: 480, status: "active" },
-  { id: "c2", name: "Neo-Vista Suites", type: "Skyline District", address: "88 Horizon Way, North Ridge", neighborhood: "North Ridge", unitCapacity: 1240, status: "active" },
-  { id: "c3", name: "The Quartz Tower", type: "East Bay View", address: "12 Emerald Coast, Maritime Way", neighborhood: "Maritime Way", unitCapacity: 320, status: "inactive" },
-  { id: "c4", name: "Obsidian Terraces", type: "South Gardens", address: "55 Primrose Blvd, South District", neighborhood: "South District", unitCapacity: 85, status: "active" },
-  { id: "c5", name: "Meridian Heights", type: "Central District", address: "210 Meridian Ave, Central Core", neighborhood: "Central Core", unitCapacity: 650, status: "active" },
-];
+export const mockCondo: Condo = {
+  id: "c1",
+  name: "The Obsidian Tower",
+  type: "Luxury Residential",
+  address: "402 Obsidian Ave, Downtown Core",
+  neighborhood: "Downtown Core",
+  city: "New York, NY",
+  unitCapacity: 480,
+  totalUnits: 124,
+  occupiedUnits: 116,
+  blocks: 3,
+  residents: 248,
+  status: "active",
+};
 
 // ─── Blocks & Units ───────────────────────────────────────────────────────────
 

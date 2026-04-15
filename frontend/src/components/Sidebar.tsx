@@ -9,15 +9,14 @@ import {
   Users,
   UserPlus,
   ShieldCheck,
-  Building2,
   Grid3X3,
   AlertTriangle,
   Radio,
   ClipboardList,
-  Plus,
   HelpCircle,
   LogOut,
   Settings,
+  User,
 } from "lucide-react";
 
 const navGroups = [
@@ -40,7 +39,7 @@ const navGroups = [
   {
     label: "Management",
     items: [
-      { href: "/condominios", label: "Properties", icon: Building2 },
+      { href: "/configuracoes", label: "Configurações", icon: Settings },
       { href: "/blocos", label: "Blocks & Units", icon: Grid3X3 },
       { href: "/alertas", label: "Security Alerts", icon: AlertTriangle },
       { href: "/dispositivos", label: "GPS Fleet", icon: Radio },
@@ -116,8 +115,8 @@ export function Sidebar() {
           onClick={() => router.push("/perfil")}
           className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#8c909f] hover:text-[#dae2fd] hover:bg-[#222a3d] transition-all duration-200 mb-1"
         >
-          <Settings size={16} />
-          Settings
+          <User size={16} />
+          Meu Perfil
         </button>
         <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#8c909f] hover:text-[#dae2fd] hover:bg-[#222a3d] transition-all duration-200 mb-1">
           <HelpCircle size={16} />

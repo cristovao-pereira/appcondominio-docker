@@ -10,12 +10,12 @@ const pageTitles: Record<string, string> = {
   "/moradores": "Residents",
   "/visitantes": "Visitors",
   "/autorizacao": "Authorizations",
-  "/condominios": "Properties",
+  "/configuracoes": "Configurações",
   "/blocos": "Blocks & Units",
   "/alertas": "Security Alerts",
   "/dispositivos": "GPS Fleet",
   "/auditoria": "Audit Log",
-  "/perfil": "Settings",
+  "/perfil": "Meu Perfil",
 };
 
 export function TopBar() {
