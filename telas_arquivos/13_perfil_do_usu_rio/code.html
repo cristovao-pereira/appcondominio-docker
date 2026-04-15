@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary-container": "#9fb5e7",
+                "surface-variant": "#2d3449",
+                "on-background": "#dae2fd",
+                "secondary-fixed-dim": "#b1c6f9",
+                "on-secondary-fixed-variant": "#304671",
+                "on-surface": "#dae2fd",
+                "surface-dim": "#0b1326",
+                "tertiary-fixed": "#ffdcc6",
+                "background": "#0b1326",
+                "secondary": "#b1c6f9",
+                "surface-container": "#171f33",
+                "surface": "#0b1326",
+                "surface-container-low": "#131b2e",
+                "on-error": "#690005",
+                "on-secondary-fixed": "#001a42",
+                "on-error-container": "#ffdad6",
+                "error": "#ffb4ab",
+                "tertiary": "#ffb786",
+                "on-tertiary-fixed": "#311400",
+                "on-secondary": "#182f59",
+                "on-tertiary": "#502400",
+                "surface-container-high": "#222a3d",
+                "primary-container": "#4d8eff",
+                "inverse-surface": "#dae2fd",
+                "surface-tint": "#adc6ff",
+                "inverse-on-surface": "#283044",
+                "outline": "#8c909f",
+                "error-container": "#93000a",
+                "on-primary": "#002e6a",
+                "secondary-container": "#304671",
+                "on-primary-fixed": "#001a42",
+                "inverse-primary": "#005ac2",
+                "outline-variant": "#424754",
+                "primary-fixed-dim": "#adc6ff",
+                "surface-container-lowest": "#060e20",
+                "on-surface-variant": "#c2c6d6",
+                "primary-fixed": "#d8e2ff",
+                "on-primary-container": "#00285d",
+                "surface-container-highest": "#2d3449",
+                "primary": "#adc6ff",
+                "on-primary-fixed-variant": "#004395",
+                "on-tertiary-fixed-variant": "#723600",
+                "on-tertiary-container": "#461f00",
+                "tertiary-fixed-dim": "#ffb786",
+                "surface-bright": "#31394d",
+                "tertiary-container": "#df7412",
+                "secondary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#0b1326] flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-xl font-bold text-[#adc6ff] tracking-widest uppercase font-headline">The Obsidian</h1>
+<p class="text-[10px] text-slate-500 mt-1 uppercase tracking-[0.2em] font-label">Unit 402 Concierge</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200 font-label" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200 font-label" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span>Map Tracking</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200 font-label" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Residents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200 font-label" href="#">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+<span>Visitors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#adc6ff] border-l-2 border-[#adc6ff] bg-gradient-to-r from-[#adc6ff]/10 to-transparent font-semibold font-label" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/10 pt-6 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors font-label text-sm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-400 hover:text-error transition-colors font-label text-sm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen bg-surface-dim relative">
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-[#0b1326]/80 backdrop-blur-xl flex justify-between items-center h-20 px-12 shadow-2xl shadow-black/20">
+<div class="flex items-center gap-8">
+<span class="font-headline font-black text-[#adc6ff] text-lg tracking-tight">Concierge OS</span>
+<nav class="flex gap-6">
+<a class="text-slate-400 hover:text-[#adc6ff] font-label text-sm transition-all duration-300" href="#">Directives</a>
+<a class="text-slate-400 hover:text-[#adc6ff] font-label text-sm transition-all duration-300" href="#">Packages</a>
+<a class="text-slate-400 hover:text-[#adc6ff] font-label text-sm transition-all duration-300" href="#">Valet</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="Concierge Profile" class="h-full w-full object-cover" data-alt="close-up portrait of a professional man in a tailored dark suit, sharp lighting, high-end editorial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFWKA6Tqq5vl9S4MOCm79bUjSWaiyJdm9WMcYkVCY1OcK2TBIVMFcC9PR-3PuPRZVGaUxjlgkzsvYK0ED4eaqyrhCs_ji9rZfnM5TQkLabZu_Ja5pXP430Wc1q3GDvRswBtRLBSx5CZzpQp_D2V6fRsEltYB9Zu1JVNDCAzd8bFe5T4viLK8hzlu3WRYD200pI3FTums-U6omBuyv7d_sFoca9PFPF-4N_-Ivu7sw14vjdZLadk-TL0Q0q0HUtn1JkrQZR7WGKKyqW"/>
+</div>
+</div>
+</header>
+<div class="pt-32 pb-20 px-12 max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="mb-12">
+<h2 class="font-headline text-5xl font-extrabold text-on-surface tracking-tight mb-2">Account Settings</h2>
+<p class="text-on-surface-variant font-body">Manage your professional profile and security preferences.</p>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Personal Info Section -->
+<section class="col-span-12 lg:col-span-8 space-y-8">
+<div class="bg-surface-container rounded-xl p-8 transition-all hover:bg-surface-container-high">
+<div class="flex items-start justify-between mb-8">
+<div>
+<h3 class="font-headline text-xl font-semibold text-primary mb-1">Personal Identity</h3>
+<p class="text-sm text-on-surface-variant">Update your public concierge information.</p>
+</div>
+<span class="material-symbols-outlined text-primary/40 text-3xl" data-icon="badge">badge</span>
+</div>
+<div class="flex flex-col md:flex-row gap-10 items-start">
+<!-- Avatar Upload -->
+<div class="flex flex-col items-center gap-4 group">
+<div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/20 bg-surface-container-lowest flex items-center justify-center">
+<img alt="User Avatar" class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition-opacity" data-alt="close-up portrait of a professional man in a tailored dark suit, sharp lighting, high-end editorial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDklBR8gsBipi63rYvRLVXRyMzknSNuOur3We3uwaSbUX7PLUT2Ckh_M95sLpeGAvtTiVCBCMFNTosTTkcTGdccARFZSclfeLk2bTjLdsx94LVFmE73A5avvxCSbng4A5LPggy5LVbm5jWrc_J_nHV29Xv9WUC_GoAnZ4neXtpHbCWprMVbZjSYL243dA_TW-4Owtk1R0gMZ5NllK1X2skpxVPeRNy9OiOdJBy37Plgk8dWLTLFv6N8bh5GftSA7Zcc7V9UVA0VV0AW"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="photo_camera">photo_camera</span>
+<span class="text-[10px] font-label uppercase mt-1">Upload</span>
+</div>
+</div>
+<button class="text-xs font-label text-primary-container hover:text-primary transition-colors uppercase tracking-widest">Remove Photo</button>
+</div>
+<!-- Info Form -->
+<div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-primary/50 text-on-surface transition-all" type="text" value="Alexander Sterling"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Email Address</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-primary/50 text-on-surface transition-all" type="email" value="a.sterling@obsidian-condo.com"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Phone Number</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-primary/50 text-on-surface transition-all" type="tel" value="+1 (555) 098-4421"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Employee ID</label>
+<input class="w-full bg-surface-dim/50 border-none rounded-md px-4 py-3 text-sm text-slate-500 cursor-not-allowed" readonly="" type="text" value="OBS-8829-X"/>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="px-6 py-2.5 bg-gradient-to-br from-[#adc6ff] to-[#4d8eff] text-on-primary rounded-md font-label text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 active:scale-95 transition-all">Save Profile Changes</button>
+</div>
+</div>
+<!-- Security Section -->
+<div class="bg-surface-container-low border border-outline-variant/5 rounded-xl p-8">
+<div class="flex items-start justify-between mb-8">
+<div>
+<h3 class="font-headline text-xl font-semibold text-tertiary mb-1">Security &amp; Access</h3>
+<p class="text-sm text-on-surface-variant">Manage your credentials and login methods.</p>
+</div>
+<span class="material-symbols-outlined text-tertiary/40 text-3xl" data-icon="lock_open">lock_open</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Current Password</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-tertiary/50 text-on-surface transition-all" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">New Password</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-tertiary/50 text-on-surface transition-all" placeholder="Enter new password" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant ml-1">Confirm New Password</label>
+<input class="w-full bg-surface-container-highest border-none rounded-md px-4 py-3 text-sm focus:ring-1 focus:ring-tertiary/50 text-on-surface transition-all" placeholder="Confirm new password" type="password"/>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<p class="text-xs text-on-surface-variant italic">Last changed 42 days ago</p>
+<button class="px-6 py-2.5 border border-tertiary/30 text-tertiary rounded-md font-label text-sm font-medium hover:bg-tertiary/10 active:scale-95 transition-all">Update Password</button>
+</div>
+</div>
+</section>
+<!-- Sidebar Content (Permissions & Meta) -->
+<section class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Permissions Summary -->
+<div class="bg-surface-container rounded-xl p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl" data-icon="verified_user">verified_user</span>
+</div>
+<h3 class="font-headline text-lg font-semibold text-on-surface mb-6">Permission Role</h3>
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-primary/10 p-3 rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<span class="block text-xs font-label uppercase tracking-widest text-on-surface-variant">Assigned Role</span>
+<span class="text-xl font-headline font-bold text-on-surface">Senior Concierge</span>
+</div>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Manage Building Access</span>
+</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Guest Log Clearance</span>
+</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Internal Directives</span>
+</li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant opacity-50">
+<span class="material-symbols-outlined text-slate-500 text-lg" data-icon="cancel">cancel</span>
+<span>Financial Records</span>
+</li>
+</ul>
+</div>
+<!-- Additional Context Card -->
+<div class="bg-gradient-to-br from-surface-container-high to-surface-container rounded-xl p-8">
+<h3 class="font-headline text-lg font-semibold text-on-surface mb-4">Quick Stats</h3>
+<div class="space-y-6">
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-4">
+<div>
+<span class="block text-[10px] font-label uppercase tracking-[0.15em] text-on-surface-variant">Shift completion</span>
+<span class="text-2xl font-headline font-light">98.4%</span>
+</div>
+<span class="text-xs text-primary font-label">+2.1%</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-4">
+<div>
+<span class="block text-[10px] font-label uppercase tracking-[0.15em] text-on-surface-variant">Resident rating</span>
+<span class="text-2xl font-headline font-light">4.92</span>
+</div>
+<div class="flex text-tertiary">
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- System Status Footer (Minimal) -->
+<footer class="absolute bottom-0 right-0 w-full px-12 py-6 flex justify-between items-center bg-surface-dim/80 backdrop-blur-sm pointer-events-none">
+<div class="flex items-center gap-3 text-[10px] uppercase tracking-widest text-slate-600">
+<span class="flex h-1.5 w-1.5 rounded-full bg-emerald-500/60 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></span>
+<span>Systems Encrypted &amp; Operational</span>
+</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-600">
+                © Obsidian Condo Group LLC
+            </div>
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Concierge OS | Secure Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#9fb5e7",
+                        "surface-variant": "#2d3449",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed-dim": "#b1c6f9",
+                        "on-secondary-fixed-variant": "#304671",
+                        "on-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "tertiary-fixed": "#ffdcc6",
+                        "background": "#0b1326",
+                        "secondary": "#b1c6f9",
+                        "surface-container": "#171f33",
+                        "surface": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001a42",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb786",
+                        "on-tertiary-fixed": "#311400",
+                        "on-secondary": "#182f59",
+                        "on-tertiary": "#502400",
+                        "surface-container-high": "#222a3d",
+                        "primary-container": "#4d8eff",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#adc6ff",
+                        "inverse-on-surface": "#283044",
+                        "outline": "#8c909f",
+                        "error-container": "#93000a",
+                        "on-primary": "#002e6a",
+                        "secondary-container": "#304671",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-primary": "#005ac2",
+                        "outline-variant": "#424754",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-lowest": "#060e20",
+                        "on-surface-variant": "#c2c6d6",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#00285d",
+                        "surface-container-highest": "#2d3449",
+                        "primary": "#adc6ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#461f00",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "surface-bright": "#31394d",
+                        "tertiary-container": "#df7412",
+                        "secondary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30 selection:text-primary min-h-screen flex items-center justify-center p-6 overflow-hidden relative">
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-secondary/5 blur-[120px]"></div>
+</div>
+<main class="relative z-10 w-full max-w-[480px]">
+<div class="mb-12 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-2xl" data-icon="lock_person">lock_person</span>
+</div>
+<h2 class="font-headline font-black text-xl tracking-widest uppercase text-primary">Concierge OS</h2>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-extralight tracking-tight text-on-surface leading-tight">
+                Welcome to <br/><span class="font-bold text-white">The Obsidian</span>
+</h1>
+<p class="mt-4 text-on-surface-variant text-sm font-light tracking-wide uppercase">Authentication Required</p>
+</div>
+<div class="bg-surface-container-low p-8 md:p-12 rounded-xl shadow-2xl shadow-black/40 backdrop-blur-md relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary/50 to-transparent"></div>
+<form action="#" class="space-y-8">
+<div class="space-y-6">
+<div class="relative group">
+<label class="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-[0.2em] mb-2 px-1" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg group-focus-within:text-primary transition-colors" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-surface-container-highest border-none rounded-md py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-1 focus:ring-primary/40 focus:bg-surface-bright transition-all font-body text-sm" id="email" name="email" placeholder="name@obsidian-residences.com" required="" type="email"/>
+</div>
+</div>
+<div class="relative group">
+<div class="flex justify-between items-end mb-2 px-1">
+<label class="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-[0.2em]" for="password">Password</label>
+<a class="text-[10px] font-semibold text-primary uppercase tracking-widest hover:text-primary-fixed transition-colors" href="#">Forgot Access?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg group-focus-within:text-primary transition-colors" data-icon="key">key</span>
+<input class="w-full bg-surface-container-highest border-none rounded-md py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-1 focus:ring-primary/40 focus:bg-surface-bright transition-all font-body text-sm" id="password" name="password" placeholder="••••••••••••" required="" type="password"/>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-headline font-extrabold uppercase tracking-widest text-xs rounded-md shadow-lg shadow-primary/10 hover:shadow-primary/20 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group" type="submit">
+                        Enter Workspace
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<div class="mt-10 pt-8 border-t border-outline-variant/10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">Network Secure</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-help hover:text-primary transition-colors" data-icon="help">help</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary transition-colors" data-icon="language">language</span>
+</div>
+</div>
+</div>
+<footer class="mt-8 text-center">
+<p class="text-[10px] text-on-surface-variant/60 font-light tracking-widest uppercase">
+                © 2024 Obsidian Luxury Residences • Concierge OS v4.2.0
+            </p>
+</footer>
+</main>
+<div class="fixed bottom-10 right-10 flex flex-col items-end gap-2 opacity-20 hover:opacity-100 transition-opacity duration-500">
+<div class="h-[1px] w-24 bg-gradient-to-l from-primary/50 to-transparent"></div>
+<p class="text-[8px] font-headline font-black uppercase tracking-[0.4em] text-primary">Terminal Access</p>
+</div>
+</body></html>

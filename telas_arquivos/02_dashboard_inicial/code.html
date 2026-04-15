@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Concierge OS - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#9fb5e7",
+                        "surface-variant": "#2d3449",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed-dim": "#b1c6f9",
+                        "on-secondary-fixed-variant": "#304671",
+                        "on-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "tertiary-fixed": "#ffdcc6",
+                        "background": "#0b1326",
+                        "secondary": "#b1c6f9",
+                        "surface-container": "#171f33",
+                        "surface": "#0b1326",
+                        "surface-container-low": "#131b2e",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001a42",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb786",
+                        "on-tertiary-fixed": "#311400",
+                        "on-secondary": "#182f59",
+                        "on-tertiary": "#502400",
+                        "surface-container-high": "#222a3d",
+                        "primary-container": "#4d8eff",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#adc6ff",
+                        "inverse-on-surface": "#283044",
+                        "outline": "#8c909f",
+                        "error-container": "#93000a",
+                        "on-primary": "#002e6a",
+                        "secondary-container": "#304671",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-primary": "#005ac2",
+                        "outline-variant": "#424754",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-lowest": "#060e20",
+                        "on-surface-variant": "#c2c6d6",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#00285d",
+                        "surface-container-highest": "#2d3449",
+                        "primary": "#adc6ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#461f00",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "surface-bright": "#31394d",
+                        "tertiary-container": "#df7412",
+                        "secondary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body antialiased overflow-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#0b1326] flex flex-col h-full py-8 px-4 font-['Manrope'] tracking-tight z-50">
+<div class="mb-10 px-4">
+<h1 class="text-xl font-bold text-[#adc6ff] tracking-widest uppercase">The Obsidian</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-1">Unit 402 Concierge</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#adc6ff] border-l-2 border-[#adc6ff] bg-gradient-to-r from-[#adc6ff]/10 to-transparent transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="text-sm">Map Tracking</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-sm">Residents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+<span class="text-sm">Visitors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-200 hover:bg-[#131b2e] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-8 border-t border-slate-800/50">
+<button class="w-full bg-gradient-to-br from-[#adc6ff] to-[#4d8eff] text-on-primary py-3 rounded-lg font-bold text-sm mb-6 active:scale-95 transition-transform">
+                New Request
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-slate-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span class="text-xs">Support</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-slate-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span class="text-xs">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen bg-surface flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-[#0b1326]/80 backdrop-blur-xl flex justify-between items-center h-20 px-8 transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-8">
+<span class="font-['Manrope'] font-black text-[#adc6ff] text-lg tracking-tight">Concierge OS</span>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-highest border-none rounded-lg pl-10 pr-4 py-2 text-xs w-64 focus:ring-1 focus:ring-primary placeholder:text-slate-500" placeholder="Search residents, units, or logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="flex gap-6">
+<a class="text-[#adc6ff] font-semibold border-b-2 border-[#adc6ff] text-sm py-2" href="#">Directives</a>
+<a class="text-slate-400 hover:text-[#adc6ff] text-sm py-2 transition-all" href="#">Packages</a>
+<a class="text-slate-400 hover:text-[#adc6ff] text-sm py-2 transition-all" href="#">Valet</a>
+</nav>
+<div class="h-6 w-[1px] bg-slate-800"></div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:bg-white/5 p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-400 hover:bg-white/5 p-2 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<div class="flex items-center gap-3 pl-2">
+<img alt="User Avatar" class="w-10 h-10 rounded-full object-cover border border-slate-700" data-alt="portrait of a professional male concierge in a dark suit with a warm and sophisticated expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMUfIEdxsOQHYQZDaYEUZOCn8bWbZX1AAVlKA9cRSRm-gLz7XIscj4y9LUxUs6u3Hg3tx2dr-aFveFYyjrOx1OXv96c4DF0mEZr5yRhEwByHcNfSFPNVb6Xt97OBqSz3nLFoIJ5jKyl2JUWqR8Mg4W5Nr3hOBvjNFtYSm-3NLF4BWRc3GCEIJElLxXZHOFRR5UKeBAdv4UOvxsjNGkEX8KC42-Sclg7UiGndH0XNehfsAL8wZBCr60FHxXE7FtGb1ZX9ZMMUlcXH9W"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="mt-20 p-8 flex flex-col gap-8 overflow-y-auto">
+<!-- Hero Header Section -->
+<section>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">Evening, Marcus.</h2>
+<p class="text-slate-500 font-label text-sm uppercase tracking-widest mt-2">Operations Overview • The Obsidian Tower</p>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Active Visitors -->
+<div class="bg-surface-container rounded-xl p-6 transition-colors hover:bg-surface-container-high group border-none">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="how_to_reg">how_to_reg</span>
+</div>
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<p class="text-3xl font-headline font-bold text-on-surface">14</p>
+<p class="text-xs font-label uppercase tracking-wider text-slate-500 mt-1">Active Visitors</p>
+<div class="mt-4 flex items-center gap-1 text-[10px] text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+<span>+3 since 6PM</span>
+</div>
+</div>
+<!-- Pending Invitations -->
+<div class="bg-surface-container rounded-xl p-6 transition-colors hover:bg-surface-container-high border-none">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="pending_actions">pending_actions</span>
+</div>
+</div>
+<p class="text-3xl font-headline font-bold text-on-surface">08</p>
+<p class="text-xs font-label uppercase tracking-wider text-slate-500 mt-1">Pending Invites</p>
+<div class="mt-4 text-[10px] text-tertiary">
+<span>Awaiting clearance: 4</span>
+</div>
+</div>
+<!-- Active Alerts -->
+<div class="bg-surface-container rounded-xl p-6 transition-colors hover:bg-surface-container-high border-none">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/10 rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+</div>
+</div>
+<p class="text-3xl font-headline font-bold text-on-surface">02</p>
+<p class="text-xs font-label uppercase tracking-wider text-slate-500 mt-1">Active Alerts</p>
+<div class="mt-4 flex items-center gap-1 text-[10px] text-error">
+<span class="material-symbols-outlined text-xs" data-icon="error">error</span>
+<span>Service Elevator A Jammed</span>
+</div>
+</div>
+<!-- GPS Devices -->
+<div class="bg-surface-container rounded-xl p-6 transition-colors hover:bg-surface-container-high border-none">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="router">router</span>
+</div>
+</div>
+<p class="text-3xl font-headline font-bold text-on-surface">42</p>
+<p class="text-xs font-label uppercase tracking-wider text-slate-500 mt-1">GPS Devices Available</p>
+<div class="mt-4 text-[10px] text-secondary">
+<span>85% Inventory efficiency</span>
+</div>
+</div>
+</section>
+<!-- Main Interactive Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Recent Movements List (Left 2 Columns) -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline font-bold text-lg text-on-surface tracking-tight">Recent Movements</h3>
+<button class="text-xs font-label text-primary hover:underline">Export Logs</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="grid grid-cols-12 px-6 py-4 border-b border-slate-800/30 text-[10px] font-label uppercase tracking-widest text-slate-500">
+<div class="col-span-5">Identity</div>
+<div class="col-span-3">Destination</div>
+<div class="col-span-2">Time</div>
+<div class="col-span-2 text-right">Status</div>
+</div>
+<!-- Movement Item 1 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container transition-colors cursor-pointer">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary text-xs font-bold">JD</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Julianne DeSilva</p>
+<p class="text-[10px] text-slate-500">Visitor • Pass #8841</p>
+</div>
+</div>
+<div class="col-span-3 text-sm text-slate-300">Unit 1402 (Sky Loft)</div>
+<div class="col-span-2 text-sm text-slate-500">19:42 PM</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Entry</span>
+</div>
+</div>
+<!-- Movement Item 2 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container transition-colors cursor-pointer">
+<div class="col-span-5 flex items-center gap-3">
+<img alt="Resident Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="Close up portrait of a young professional man with glasses and a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOHQ-elxdrdB9A2zYytX87WxnCVdapy5auB_aVD64P9dCU3VO5Xslsz8od2oZ9Kxb4kBVmpE8sGi4eIi98RBJUlpXwDDf5EzrbaXK6_L7RK8yqRbCnBgC9-5J755nSEtqdGoL6DlPjzU12NP3hpcMBatyMVKwOnd4_zxmlaR8mzLLPb2IqjjQUJzbLj-fV4nGdsqeVR3_iX_xsw-qa5VuJRyqsmUqYBLH1etxuFz1vu6Dfe3bpxk2BgJ4tdjx1ON0qRkuIFozEFzfL"/>
+<div>
+<p class="text-sm font-semibold text-on-surface">Dr. Elias Vance</p>
+<p class="text-[10px] text-slate-500">Resident • Unit 0402</p>
+</div>
+</div>
+<div class="col-span-3 text-sm text-slate-300">Valet Concierge</div>
+<div class="col-span-2 text-sm text-slate-500">19:28 PM</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 rounded bg-slate-800 text-slate-400 text-[10px] font-bold uppercase tracking-wider">Exit</span>
+</div>
+</div>
+<!-- Movement Item 3 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container transition-colors cursor-pointer">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary text-xs font-bold">S</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Seamless Delivery</p>
+<p class="text-[10px] text-slate-500">Service • Courier #09</p>
+</div>
+</div>
+<div class="col-span-3 text-sm text-slate-300">Mail Room</div>
+<div class="col-span-2 text-sm text-slate-500">19:15 PM</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Entry</span>
+</div>
+</div>
+<!-- Movement Item 4 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-surface-container transition-colors cursor-pointer">
+<div class="col-span-5 flex items-center gap-3">
+<img alt="Visitor Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="portrait of a professional woman with a welcoming expression in high-key lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaf2SZmqw45H8Pp8x1LQOGlgbZMN-eO27VAx6xLlBxovPm5HTnsBP1_A1g7VGDMI6C1Gl_KkZShJiECILSgmM1Fit1mQPWtFnY_Zk3v6qWZABkd8Z3O-yNE27pMbdWDkeCFFBeDRByisyDJ6yB2z0f1Vxi9zYwVBZYt9mJAUO8OYcOuQDeDeTqi98pxhXlgVfEb1rwHUzXNd8k9fwGIkIf_SX0hb-J-QjFG0XjJ-dwZ1xyxLi0E8GJ2RzzRHlwMNg9LGzpDXhPeKWy"/>
+<div>
+<p class="text-sm font-semibold text-on-surface">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-500">Guest • Unit 2201</p>
+</div>
+</div>
+<div class="col-span-3 text-sm text-slate-300">Rooftop Lounge</div>
+<div class="col-span-2 text-sm text-slate-500">18:55 PM</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Entry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel (Mini Map & Notification) -->
+<div class="flex flex-col gap-6">
+<!-- Mini Preview Map -->
+<div class="bg-surface-container rounded-xl overflow-hidden editorial-shadow">
+<div class="p-4 flex items-center justify-between">
+<h4 class="text-xs font-label font-bold uppercase tracking-widest text-on-surface">Unit 1402 Tracking</h4>
+<span class="text-[10px] text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">circle</span> Live
+                            </span>
+</div>
+<div class="relative h-48 w-full bg-surface-container-highest">
+<!-- Visual placeholder for map -->
+<div class="absolute inset-0 opacity-40 mix-blend-overlay grayscale contrast-125" data-alt="A stylized minimalist dark overhead architectural floor plan with subtle blue glowing lines representing paths" data-location="New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3j5bND8CbaojOfTQaLGJvrCI5o33Xe1jp7z1OfuxEx-J2R_JapWBYo_OpqKyKSMLghj__TdmEKOaP-VghcvVidrqCSEy3NH0fZEPlwpahwvcXznrDlbHM8frFzh7TGIV9hsHllEvIvS13mBQsZVl7ycyVXoMxbcPGnQC3AILF34ju0TUMHOIghcP3MYZCVTu0zgTGTnXv67uEFVeCPND0jKb2PChC6ugRzj6lRPNxrfHkt_zSg21cqgXDrZBjDAz3Lv2bYgxzu03Y'); background-size: cover;">
+</div>
+<!-- Map Pin Markers -->
+<div class="absolute top-1/2 left-1/3 group">
+<div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center animate-ping"></div>
+<div class="absolute top-1 left-1 w-4 h-4 bg-primary rounded-full border-2 border-surface shadow-lg shadow-primary/40"></div>
+</div>
+<div class="absolute bottom-1/4 right-1/4">
+<div class="w-4 h-4 bg-surface-container-highest rounded-full border-2 border-slate-500"></div>
+</div>
+<!-- Pathing UI element -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none">
+<path class="blur-[1px] opacity-60" d="M120 100 L200 150" fill="transparent" stroke="#adc6ff" stroke-dasharray="4 4" stroke-width="2"></path>
+</svg>
+</div>
+<div class="p-4 bg-surface-container-high flex items-center gap-3">
+<div class="p-2 bg-surface rounded-lg">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="distance">distance</span>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 uppercase font-label">Current Altitude</p>
+<p class="text-sm font-headline font-bold text-on-surface tracking-tight">Level 14 - Sky Lounge</p>
+</div>
+</div>
+</div>
+<!-- Rapid Notifications -->
+<div class="bg-surface-container rounded-xl p-6">
+<h4 class="text-xs font-label font-bold uppercase tracking-widest text-on-surface mb-6">Service Alerts</h4>
+<div class="space-y-6">
+<div class="flex gap-4 items-start relative">
+<div class="w-[2px] h-full bg-slate-800 absolute left-[15px] top-8"></div>
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="package_2">package_2</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">Amazon Fresh Delivery</p>
+<p class="text-[10px] text-slate-500 mt-1">Pending refrigerated locker 04</p>
+<p class="text-[9px] text-slate-600 mt-2 font-label uppercase tracking-tighter">04 min ago</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-sm text-tertiary" data-icon="local_taxi">local_taxi</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">Uber Black - Arrival</p>
+<p class="text-[10px] text-slate-500 mt-1">Guest of Unit 3105 at front gate</p>
+<p class="text-[9px] text-slate-600 mt-2 font-label uppercase tracking-tighter">12 min ago</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-sm text-slate-500" data-icon="cleaning_services">cleaning_services</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-on-surface">Housekeeping Complete</p>
+<p class="text-[10px] text-slate-500 mt-1">Unit 1102 maintenance check cleared</p>
+<p class="text-[9px] text-slate-600 mt-2 font-label uppercase tracking-tighter">38 min ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
