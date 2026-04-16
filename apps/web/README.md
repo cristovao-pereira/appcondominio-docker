@@ -1,8 +1,8 @@
 # App Web (Next.js)
 
-Aplicacao web do Sistema de Portaria com Rastreamento GPS.
+Aplicacao frontend do Sistema de Portaria com Rastreamento GPS.
 
-Para contexto funcional e arquitetura geral, consulte o README raiz em [../../README.md](../../README.md) e os documentos de especificacao em [../../docs](../../docs).
+Para arquitetura global e operacao da plataforma, consulte [README.md](../../README.md).
 
 ## Stack
 
@@ -11,32 +11,56 @@ Para contexto funcional e arquitetura geral, consulte o README raiz em [../../RE
 - TypeScript
 - Tailwind CSS 4
 
-## Executar Localmente
+## Pre-requisitos
 
-1. Instalar dependencias:
+- Node.js 20+
+- npm 10+
+
+## Configuracao
+
+Este app utiliza variaveis definidas no arquivo `.env` da raiz do monorepo.
+
+Variaveis principais para o frontend:
+
+- `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_WS_URL`
+
+## Execucao
+
+### Modo 1 - Desenvolvimento isolado (somente web)
+
+Na pasta `apps/web`:
 
 ```bash
 npm install
-```
-
-2. Subir ambiente de desenvolvimento:
-
-```bash
 npm run dev
 ```
 
-3. Acessar no navegador:
+Acesse: `http://localhost:3000`
 
-`http://localhost:3000`
+### Modo 2 - Stack completa com Docker (recomendado no projeto)
 
-## Scripts
+Na raiz do repositorio:
 
-- `npm run dev`
-- `npm run build`
-- `npm run start`
-- `npm run lint`
+```bash
+npm run dev:local
+```
 
-## Estrutura Interna
+Esse modo sobe `web`, `backend` e `postgres` via Docker Compose.
+
+## Scripts locais (apps/web)
+
+- `npm run dev` inicia servidor de desenvolvimento
+- `npm run build` gera build de producao
+- `npm run start` sobe app em modo producao
+- `npm run lint` executa lint
+
+## Integracao com backend
+
+- Em desenvolvimento com Docker, o backend responde na porta `3001`.
+- Garanta que `NEXT_PUBLIC_API_URL` aponte para o endpoint correto da API.
+
+## Estrutura interna
 
 ```text
 apps/web/
@@ -45,5 +69,12 @@ apps/web/
     components/       # Layout e componentes reutilizaveis
     data/             # Dados mockados
     hooks/            # Hooks de estado e comportamento
+    lib/              # Utilitarios
     types/            # Tipagens de dominio
 ```
+
+## Troubleshooting rapido
+
+- Erro de conexao com API: revise `NEXT_PUBLIC_API_URL` no `.env`.
+- Porta 3000 ocupada: altere porta no comando de execucao ou encerre processo em conflito.
+- Erro de dependencia: remova `node_modules` e reinstale com `npm install`.

@@ -107,6 +107,11 @@ Script de apoio na VPS: [`scripts/deploy.sh`](scripts/deploy.sh).
 
 ## Documentacao
 
+- [apps/backend/README.md](apps/backend/README.md)
+- [apps/web/README.md](apps/web/README.md)
+- [docs/Checklist-Release-Deploy.md](docs/Checklist-Release-Deploy.md)
+- [docs/Template-Release-Notes.md](docs/Template-Release-Notes.md)
+- [docs/releases/2026-04-16-release-r0.md](docs/releases/2026-04-16-release-r0.md)
 - [docs/Arquitetura-Tecnica-Recomendada.md](docs/Arquitetura-Tecnica-Recomendada.md)
 - [docs/Telas-Principais-do-Sistema.md](docs/Telas-Principais-do-Sistema.md)
 - [docs/Modelagem-Banco-de-Dados.md](docs/Modelagem-Banco-de-Dados.md)
