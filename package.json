@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "npm run dev --prefix apps/web",
+    "dev:local": "docker compose up --build",
+    "dev:local:down": "docker compose down",
+    "dev:local:logs": "docker compose logs -f",
+    "prod:up": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d",
+    "prod:down": "docker compose -f docker-compose.yml -f docker-compose.prod.yml down",
     "build": "npm run build --prefix apps/web",
     "start": "npm run start --prefix apps/web",
     "lint": "npm run lint --prefix apps/web"

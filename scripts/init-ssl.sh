@@ -23,10 +23,8 @@ echo "==> Aguardando Nginx ficar pronto..."
 sleep 5
 
 echo "==> Emitindo certificado para $DOMAIN..."
-docker run --rm \
-  -v "${APP_DIR}/infra/certbot/www:/var/www/certbot" \
-  -v "${APP_DIR}/infra/certbot/certs:/etc/letsencrypt" \
-  certbot/certbot certonly \
+docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm \
+  --entrypoint certbot certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     --email "$EMAIL" \
