@@ -5,3 +5,19 @@ node_modules/
 apps/web/.next/
 apps/backend/dist/
 *.log
+*.pid
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# caches/build metadata
+coverage/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# IDE/system
+.idea/
+.vscode/
+.DS_Store
