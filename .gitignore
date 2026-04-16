@@ -17,6 +17,9 @@ coverage/
 .eslintcache
 *.tsbuildinfo
 
+#skills stitch
+skills/
+
 # IDE/system
 .idea/
 .vscode/
