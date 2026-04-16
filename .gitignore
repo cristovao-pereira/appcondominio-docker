@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.*
+!.env.example
+apps/web/.next/
+apps/backend/dist/
+*.log
