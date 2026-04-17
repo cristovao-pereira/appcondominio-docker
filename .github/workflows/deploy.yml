@@ -1,9 +1,14 @@
 name: Deploy to VPS
 
+# Workflow DESATIVADO - Remova esta linha e descomente o trigger abaixo quando for usar deploy automático
+# on:
+#   push:
+#     branches:
+#       - main
+
+# Para executar manualmente quando necessário:
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
