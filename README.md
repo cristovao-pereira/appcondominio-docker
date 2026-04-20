@@ -1,129 +1,206 @@
-# Sistema de Portaria com Rastreamento GPS
+# 🏢 Sistema de Portaria com Rastreamento GPS
 
-Monorepo para gestao de portaria em condominios com controle de visitantes, trilha de auditoria e rastreamento por GPS.
+> Monorepo completo para gestão de portaria em condomínios — controle de visitantes, trilha de auditoria e rastreamento veicular em tempo real.
 
-Repositorio remoto atual: https://github.com/cristovao-pereira/appcondominio-docker
+[![NestJS](https://img.shields.io/badge/NestJS-11-red?style=flat-square&logo=nestjs)](https://nestjs.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=nextjs)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://typescriptlang.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?style=flat-square&logo=postgresql)](https://postgresql.org)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=flat-square&logo=docker)](https://docker.com)
 
-## Stack
+---
 
-- Frontend: Next.js 16 + React 19 + TypeScript
-- Backend: NestJS 11 + TypeScript
-- Banco de dados: PostgreSQL 16
-- Infra: Docker Compose (dev e prod), Nginx, Certbot, GHCR
-- CI/CD: GitHub Actions com deploy para VPS
+## 📋 Visão Geral
 
-## Estrutura
+Sistema robusto de **gestão de portaria condominial** com módulos de controle de visitantes, rastreamento GPS de veículos e trilha de auditoria completa. Construído sobre uma arquitetura moderna baseada em containers, projetado para deploy confiável em VPS.
 
-```text
-appcondominio/
-  apps/
-    backend/           # API NestJS
-    web/               # Aplicacao Next.js
-  infra/
-    nginx/             # Reverse proxy
-    postgres/          # Init e config do Postgres
-  scripts/             # Scripts de deploy e setup
-  docs/                # Especificacoes funcionais e tecnicas
+---
+
+## 🧱 Arquitetura do Sistema
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                        Nginx (Reverse Proxy)                  │
+│                    porta 80/443 — SSL automático              │
+└─────────────────────┬──────────────────────────────────────┘
+                      │
+         ┌───────────┴────────────┐
+         │                        │
+  ┌──────▼──────┐         ┌──────▼──────┐
+  │  Next.js    │         │   NestJS    │
+  │  Frontend   │         │   Backend   │
+  │  porta 3000 │         │   porta 3001│
+  └─────────────┘         └──────┬──────┘
+                                │
+                        ┌──────▼──────┐
+                        │  PostgreSQL │
+                        │   porta 5432│
+                        └─────────────┘
 ```
 
-## Pre-requisitos
+---
 
-- Node.js 20+
-- Docker e Docker Compose v2
-- Git
+## ⚙️ Stack Tecnológica
 
-## Configuracao de ambiente
+| Camada        | Tecnologia                                    |
+|---------------|-----------------------------------------------|
+| **Frontend**  | Next.js 16 · React 19 · TypeScript · Tailwind |
+| **Backend**   | NestJS 11 · TypeScript · Prisma ORM            |
+| **Banco**     | PostgreSQL 16                                 |
+| **Infra**     | Docker Compose · Nginx · Certbot · GHCR       |
+| **CI/CD**     | GitHub Actions · Deploy automatizado para VPS |
 
-1. Copie o arquivo de exemplo:
+---
+
+## 📁 Estrutura do Projeto
+
+```
+appcondominio-docker/
+├── apps/
+│   ├── backend/              # API REST — NestJS
+│   │   ├── src/
+│   │   │   ├── app.controller.ts
+│   │   │   ├── app.module.ts
+│   │   │   └── main.ts
+│   │   ├── Dockerfile
+│   │   └── package.json
+│   │
+│   └── web/                 # Aplicação Web — Next.js
+│       ├── src/
+│       │   ├── app/          # Rotas (page.tsx, /login, /dashboard…)
+│       │   ├── components/   # Componentes reutilizáveis
+│       │   ├── hooks/        # Custom hooks (useAuth, useDashboard…)
+│       │   ├── types/        # Definições TypeScript
+│       │   └── data/         # Dados mock / fixtures
+│       ├── Dockerfile
+│       └── package.json
+│
+├── infra/
+│   ├── nginx/                # Configuração do reverse proxy
+│   │   ├── nginx.conf
+│   │   └── conf.d/app.conf
+│   └── postgres/             # Scripts de inicialização
+│       ├── init.sql
+│       └── postgres.conf
+│
+├── scripts/
+│   ├── deploy.sh              # Script de deploy na VPS
+│   ├── init-ssl.sh            # Setup SSL com Certbot
+│   └── setup-vps.sh           # Provisionamento inicial
+│
+├── docs/                      # Documentação técnica e funcional
+│   ├── Arquitetura-Tecnica-Recomendada.md
+│   ├── Modelagem-Banco-de-Dados.md
+│   ├── Api.md
+│   └── releases/
+│
+├── docker-compose.yml         # Base dev
+├── docker-compose.prod.yml    # Override produção
+└── package.json               # Scripts de orquestração
+```
+
+---
+
+## 🚀 Começando
+
+### Pré-requisitos
+
+- **Node.js** 20+
+- **Docker** e **Docker Compose** v2
+- **Git**
+
+### Instalação
 
 ```bash
-cp .env.example .env
-```
+# Clonar o repositório
+git clone https://github.com/cristovao-pereira/appcondominio-docker.git
+cd appcondominio-docker
 
-No PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-2. Ajuste os valores de seguranca em `.env` (senhas, JWT, dominio, email).
-
-## Desenvolvimento local
-
-### Opcao 1 - Somente frontend (rapido)
-
-```bash
+# Instalar dependências
 npm install
-npm run dev
+
+# Copiar e configurar variáveis de ambiente
+cp .env.example .env
+# ↑ Edite o .env com suas senhas, chaves JWT e domínios
 ```
 
-Aplicacao em `http://localhost:3000`.
+### Desenvolvimento — Apenas Frontend (rápido)
 
-### Opcao 2 - Stack completa com Docker (recomendado)
+```bash
+npm run dev
+# → Acesse http://localhost:3000
+```
+
+### Desenvolvimento — Stack Completa com Docker _(recomendado)_
 
 ```bash
 npm run dev:local
 ```
 
-Servicos:
+| Serviço    | URL                          |
+|------------|------------------------------|
+| Web        | http://localhost:3000        |
+| Backend    | http://localhost:3001        |
+| PostgreSQL | localhost:5432               |
 
-- Web: `http://localhost:3000`
-- Backend: `http://localhost:3001`
-- Postgres: `localhost:5432`
-
-Para parar:
+Para remover os containers:
 
 ```bash
 npm run dev:local:down
 ```
 
-## Producao (compose override)
+---
 
-O ambiente de producao combina:
+## 🐳 Deploy em Produção
 
-- `docker-compose.yml` (base)
-- `docker-compose.prod.yml` (override prod)
-
-As imagens da aplicacao sao lidas do GHCR usando:
-
-- `GITHUB_REPOSITORY` (ex.: `cristovao-pereira/appcondominio-docker`)
-- `IMAGE_TAG` (ex.: `latest` ou SHA do commit)
-
-Exemplo de subida:
+O ambiente de produção utiliza um **compose override**:
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-## CI/CD e deploy
+> As imagens Docker são pulladas do **GitHub Container Registry (GHCR)** usando as variáveis `GITHUB_REPOSITORY` e `IMAGE_TAG`.
 
-Pipeline em [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+---
 
-- Build e push de `web` e `backend` para GHCR
-- Copia arquivos de infra para VPS
-- Executa deploy remoto com pull de imagens e restart controlado
+## 🔄 Pipeline CI/CD
 
-Script de apoio na VPS: [`scripts/deploy.sh`](scripts/deploy.sh).
+```
+Push/Merge → GitHub Actions
+    │
+    ├── 1. Build & push imagens (web + backend) → GHCR
+    ├── 2. Copia arquivos de infra para VPS (scp)
+    └── 3. Executa deploy remoto (pull + restart controlado)
+```
 
-## Documentacao
+Consulte [`scripts/deploy.sh`](scripts/deploy.sh) para detalhes do processo.
 
-- [apps/backend/README.md](apps/backend/README.md)
-- [apps/web/README.md](apps/web/README.md)
-- [docs/Checklist-Release-Deploy.md](docs/Checklist-Release-Deploy.md)
-- [docs/Template-Release-Notes.md](docs/Template-Release-Notes.md)
-- [docs/releases/README.md](docs/releases/README.md)
-- [docs/releases/2026-04-16-release-r0.md](docs/releases/2026-04-16-release-r0.md)
-- [docs/Arquitetura-Tecnica-Recomendada.md](docs/Arquitetura-Tecnica-Recomendada.md)
-- [docs/Telas-Principais-do-Sistema.md](docs/Telas-Principais-do-Sistema.md)
-- [docs/Modelagem-Banco-de-Dados.md](docs/Modelagem-Banco-de-Dados.md)
-- [docs/Api.md](docs/Api.md)
-- [docs/Plano-de-Implementacao.md](docs/Plano-de-Implementacao.md)
+---
 
-## Troubleshooting rapido
+## 📖 Documentação
 
-- `npm run dev:local` nao encontrado:
-  execute `npm install` na raiz para atualizar os scripts.
-- Conflito de portas locais:
-  ajuste portas em `docker-compose.yml`.
-- Erro de pull no GHCR em producao:
-  valide login do Docker no registro e permissoes do token.
+| Documento                                                      | Descrição                                |
+|---------------------------------------------------------------|------------------------------------------|
+| [Arquitetura Técnica Recomendada](docs/Arquitetura-Tecnica-Recomendada.md) | Visão técnica da arquitetura |
+| [Modelagem do Banco de Dados](docs/Modelagem-Banco-de-Dados.md)     | Diagrama ER e schema SQL             |
+| [Api.md](docs/Api.md)                                         | Endpoints da API REST                   |
+| [Telas Principais do Sistema](docs/Telas-Principais-do-Sistema.md)  | Wireframes e fluxo de telas         |
+| [Checklist de Release](docs/Checklist-Release-Deploy.md)            | Passos para deploy de release      |
+
+---
+
+## 🔧 Troubleshooting Rápido
+
+| Problema                              | Solução                                                |
+|---------------------------------------|--------------------------------------------------------|
+| `npm run dev:local` não encontrado     | Execute `npm install` na raiz para atualizar scripts  |
+| Conflito de portas                    | Ajuste os mapeamentos de porta em `docker-compose.yml` |
+| Erro de pull no GHCR                  | Valide login do Docker no registry e permissões do token |
+
+---
+
+## 📝 Repositório Remoto
+
+```
+https://github.com/cristovao-pereira/appcondominio-docker
+```
