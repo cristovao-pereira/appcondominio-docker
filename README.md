@@ -1,6 +1,6 @@
 # 🏢 Sistema de Portaria com Rastreamento GPS
 
-> Monorepo completo para gestão de portaria em condomínios — controle de visitantes, trilha de auditoria e rastreamento veicular em tempo real.
+> ⚠️ **PROJETO EDUCACIONAL — ESTÁGIO** — Sistema incompleto, desenvolvido para fins de aprendizagem. Não utilizar em produção.
 
 [![NestJS](https://img.shields.io/badge/NestJS-11-red?style=flat-square&logo=nestjs)](https://nestjs.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=nextjs)](https://nextjs.org)

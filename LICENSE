@@ -1,0 +1,34 @@
+# Licença Restritiva — Projeto Educacional
+
+**Sistema de Portaria com Rastreamento GPS**  
+Projeto de Estágio / Aprendizagem — Uso exclusivamente educacional.
+
+---
+
+## Termos e Condições
+
+### 1. Objetivo
+Este software foi desenvolvido como projeto de estágio educacional e **NÃO deve ser utilizado em ambiente de produção**.
+
+### 2. Permissão limitata
+É permitido:
+- Estudar e explorar o código para fins de aprendizagem
+- Modificar o código para entendimento pessoal
+- Compartilhar com outros estudantes para fins educacionais
+
+### 3. Restrições
+É **proibido**:
+- Usar em ambientes de produção ou sistemas reais
+- Comercializar ou relicenciar este software
+- Apresentar como projeto completo ou funcional
+- Utilizar em sistemas que gerenciem dados reais de pessoas
+
+### 4. Isenção de garantia
+Este software é fornecido "como está", sem garantias de qualquer natureza. O autor não se responsabiliza por quaisquer danos decorrentes do uso.
+
+### 5. Aviso importante
+Este projeto **NÃO está terminado** — diversas funcionalidades estão incompletas, mockadas ou em desenvolvimento. Não representa um produto pronto para uso.
+
+---
+
+*Criado como parte de atividade de estágio educacional.*
