@@ -16,6 +16,12 @@ Sistema robusto de **gestão de portaria condominial** com módulos de controle 
 
 ---
 
+## 🎬 Demonstração do Sistema
+
+![Sistema de Portaria](docs/assets/condominio-gif.gif)
+
+---
+
 ## 🧱 Arquitetura do Sistema
 
 ```
