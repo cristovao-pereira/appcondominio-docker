@@ -162,7 +162,7 @@ npm run dev:local:down
 O ambiente de produção utiliza um **compose override**:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
 ```
 
 > As imagens Docker são pulladas do **GitHub Container Registry (GHCR)** usando as variáveis `GITHUB_REPOSITORY` e `IMAGE_TAG`.
@@ -192,6 +192,7 @@ Consulte [`scripts/deploy.sh`](scripts/deploy.sh) para detalhes do processo.
 | [Api.md](docs/Api.md)                                         | Endpoints da API REST                   |
 | [Telas Principais do Sistema](docs/Telas-Principais-do-Sistema.md)  | Wireframes e fluxo de telas         |
 | [Checklist de Release](docs/Checklist-Release-Deploy.md)            | Passos para deploy de release      |
+| [MCP Oracle OAuth Remoto](docs/MCP-Oracle-OAuth-Remoto.md)          | Configuração MCP para Codex/VS Code |
 
 ---
 

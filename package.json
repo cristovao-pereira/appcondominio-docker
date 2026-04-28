@@ -7,10 +7,15 @@
     "dev:local": "docker compose up --build",
     "dev:local:down": "docker compose down",
     "dev:local:logs": "docker compose logs -f",
-    "prod:up": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d",
-    "prod:down": "docker compose -f docker-compose.yml -f docker-compose.prod.yml down",
+    "prod:up": "docker compose -f docker-compose.prod.https.yml up -d",
+    "prod:down": "docker compose -f docker-compose.prod.https.yml down",
+    "prod:http:up": "docker compose -f docker-compose.prod.http.yml up -d",
+    "prod:http:down": "docker compose -f docker-compose.prod.http.yml down",
+    "prod:https:up": "docker compose -f docker-compose.prod.https.yml up -d",
+    "prod:https:down": "docker compose -f docker-compose.prod.https.yml down",
     "build": "npm run build --prefix apps/web",
     "start": "npm run start --prefix apps/web",
-    "lint": "npm run lint --prefix apps/web"
+    "lint": "npm run lint --prefix apps/web",
+    "mcp:oracle:config": "node ./scripts/generate-mcp-oracle-config.mjs"
   }
 }
