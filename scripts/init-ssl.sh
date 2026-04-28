@@ -1,7 +1,10 @@
 #!/bin/bash
 # init-ssl.sh — Emite o certificado Let's Encrypt pela primeira vez
 # Uso: bash scripts/init-ssl.sh <dominio> <email>
-# Executar na VPS depois de subir o Nginx com docker compose
+# Fluxo atual:
+# 1) sobe apenas nginx em modo HTTP (prod.http) para desafio ACME
+# 2) executa certbot em container avulso
+# 3) sobe nginx em modo HTTPS (prod.https)
 
 set -euo pipefail
 
@@ -14,29 +17,34 @@ if [[ -z "$DOMAIN" || -z "$EMAIL" ]]; then
 fi
 
 APP_DIR="/opt/condominio"
+HTTP_COMPOSE="docker-compose.prod.http.yml"
+HTTPS_COMPOSE="docker-compose.prod.https.yml"
 
-echo "==> Subindo Nginx para desafio ACME (HTTP)..."
+echo "==> Subindo Nginx em modo HTTP para desafio ACME..."
 cd "$APP_DIR"
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d nginx
+docker compose -f "$HTTP_COMPOSE" up -d nginx
 
 echo "==> Aguardando Nginx ficar pronto..."
 sleep 5
 
 echo "==> Emitindo certificado para $DOMAIN..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm \
-  --entrypoint certbot certbot certonly \
-    --webroot \
-    --webroot-path=/var/www/certbot \
-    --email "$EMAIL" \
-    --agree-tos \
-    --no-eff-email \
-    -d "$DOMAIN"
+docker run --rm \
+  -v /etc/letsencrypt:/etc/letsencrypt \
+  -v /var/www/certbot:/var/www/certbot \
+  certbot/certbot:latest certonly \
+  --webroot \
+  --webroot-path=/var/www/certbot \
+  --email "$EMAIL" \
+  --agree-tos \
+  --no-eff-email \
+  -d "$DOMAIN"
 
 echo "==> Recarregando Nginx com SSL ativo..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml exec nginx nginx -s reload
+docker compose -f "$HTTPS_COMPOSE" up -d nginx
 
 echo ""
 echo "===================================================="
 echo " Certificado emitido com sucesso!"
-echo " Renovação automática gerenciada pelo container certbot."
+echo " Nginx alterado para modo HTTPS."
+echo " Dica: configure renovação via cron/systemd executando certbot periodicamente."
 echo "===================================================="

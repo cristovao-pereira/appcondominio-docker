@@ -26,8 +26,8 @@ Sistema robusto de **gestão de portaria condominial** com módulos de controle 
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                        Nginx (Reverse Proxy)                  │
-│                    porta 80/443 — SSL automático              │
+│                 Nginx (Reverse Proxy: HTTP/HTTPS)            │
+│                  modo local (HTTP) ou produção (HTTPS)       │
 └─────────────────────┬──────────────────────────────────────┘
                       │
          ┌───────────┴────────────┐
@@ -51,9 +51,9 @@ Sistema robusto de **gestão de portaria condominial** com módulos de controle 
 | Camada        | Tecnologia                                    |
 |---------------|-----------------------------------------------|
 | **Frontend**  | Next.js 16 · React 19 · TypeScript · Tailwind |
-| **Backend**   | NestJS 11 · TypeScript · Prisma ORM            |
+| **Backend**   | NestJS 11 · TypeScript                         |
 | **Banco**     | PostgreSQL 16                                 |
-| **Infra**     | Docker Compose · Nginx · Certbot · GHCR       |
+| **Infra**     | Docker Compose · Nginx · GHCR                 |
 | **CI/CD**     | GitHub Actions · Deploy automatizado para VPS |
 
 ---
@@ -84,7 +84,10 @@ appcondominio-docker/
 ├── infra/
 │   ├── nginx/                # Configuração do reverse proxy
 │   │   ├── nginx.conf
-│   │   └── conf.d/app.conf
+│   │   └── conf.d/
+│   │       ├── app.conf            # Template HTTPS (produção)
+│   │       ├── app.http.conf       # Configuração HTTP (local/teste)
+│   │       └── default.empty.conf  # Neutraliza default.conf da imagem
 │   └── postgres/             # Scripts de inicialização
 │       ├── init.sql
 │       └── postgres.conf
@@ -100,8 +103,10 @@ appcondominio-docker/
 │   ├── Api.md
 │   └── releases/
 │
-├── docker-compose.yml         # Base dev
-├── docker-compose.prod.yml    # Override produção
+├── docker-compose.yml              # Base dev/local
+├── docker-compose.prod.http.yml    # Produção sem SSL (teste/local)
+├── docker-compose.prod.https.yml   # Produção com SSL (recomendado)
+├── docker-compose.prod.yml         # Arquivo legado
 └── package.json               # Scripts de orquestração
 ```
 
@@ -157,15 +162,33 @@ npm run dev:local:down
 
 ---
 
-## 🐳 Deploy em Produção
+## 🐳 Deploy e Ambientes Docker
 
-O ambiente de produção utiliza um **compose override**:
+### Produção com SSL (recomendado)
 
 ```bash
-docker compose -f docker-compose.prod.yml up -d
+npm run prod:https:up
+```
+
+Pré-requisitos:
+- `DOMAIN` configurado com domínio real no `.env`
+- certificados válidos em `/etc/letsencrypt/live/<seu-dominio>/`
+
+### Produção sem SSL (teste/local)
+
+```bash
+npm run prod:http:up
+```
+
+### Atalhos
+
+```bash
+npm run prod:up      # equivalente ao modo HTTPS
+npm run prod:down
 ```
 
 > As imagens Docker são pulladas do **GitHub Container Registry (GHCR)** usando as variáveis `GITHUB_REPOSITORY` e `IMAGE_TAG`.
+> O script `scripts/deploy.sh` já usa o modo HTTPS (`docker-compose.prod.https.yml`).
 
 ---
 
@@ -192,7 +215,6 @@ Consulte [`scripts/deploy.sh`](scripts/deploy.sh) para detalhes do processo.
 | [Api.md](docs/Api.md)                                         | Endpoints da API REST                   |
 | [Telas Principais do Sistema](docs/Telas-Principais-do-Sistema.md)  | Wireframes e fluxo de telas         |
 | [Checklist de Release](docs/Checklist-Release-Deploy.md)            | Passos para deploy de release      |
-| [MCP Oracle OAuth Remoto](docs/MCP-Oracle-OAuth-Remoto.md)          | Configuração MCP para Codex/VS Code |
 
 ---
 
@@ -203,6 +225,8 @@ Consulte [`scripts/deploy.sh`](scripts/deploy.sh) para detalhes do processo.
 | `npm run dev:local` não encontrado     | Execute `npm install` na raiz para atualizar scripts  |
 | Conflito de portas                    | Ajuste os mapeamentos de porta em `docker-compose.yml` |
 | Erro de pull no GHCR                  | Valide login do Docker no registry e permissões do token |
+| Nginx reiniciando por certificado     | Use `npm run prod:http:up` para teste local sem SSL   |
+| `404` em `/api/health` no localhost   | Verifique se o modo HTTP está ativo (`npm run prod:http:up`) |
 
 ---
 

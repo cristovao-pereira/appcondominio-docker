@@ -24,3 +24,7 @@ skills/
 .idea/
 .vscode/
 .DS_Store
+
+# Codex/local artifacts
+.codex
+*.bak
