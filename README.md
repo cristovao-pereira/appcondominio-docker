@@ -192,17 +192,48 @@ npm run prod:down
 
 ---
 
-## 🔄 Pipeline CI/CD
+## 🔄 Pipeline CI/CD Automatizado
+
+A automação de deploy foi configurada usando o GitHub Actions, conectando o repositório à VPS via SSH e transferindo as configurações e arquivos sensíveis.
 
 ```
-Push/Merge → GitHub Actions
+Push na branch 'main' → GitHub Actions
     │
-    ├── 1. Build & push imagens (web + backend) → GHCR
-    ├── 2. Copia arquivos de infra para VPS (scp)
-    └── 3. Executa deploy remoto (pull + restart controlado)
+    ├── 1. Build & Push imagens (web + backend) → GitHub Container Registry (GHCR)
+    ├── 2. Transferência de infraestrutura via SCP (docker-compose, configs, nginx)
+    └── 3. Deploy via SSH:
+           ├── docker login ghcr.io
+           ├── docker compose pull
+           └── docker compose up -d --remove-orphans
 ```
 
-Consulte [`scripts/deploy.sh`](scripts/deploy.sh) para detalhes do processo.
+**Detalhes Técnicos do CI/CD (`.github/workflows/deploy.yml`):**
+- **Trigger:** Automático em push na branch `main` e disparo manual (`workflow_dispatch`).
+- **Compatibilidade:** Uso forçado do Node.js 24 (`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`) para evitar *warnings* de depreciação das actions (checkout, docker-login, etc).
+- **Segurança:** As chaves de acesso (`VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`) ficam armazenadas nos **GitHub Secrets**.
+- O arquivo `.env.prod` fica alocado apenas na VPS (e não no repositório), sendo carregado pelo Compose automaticamente na inicialização.
+
+---
+
+## ☁️ Infraestrutura: Oracle Cloud VPS
+
+A aplicação está rodando ativamente em uma instância VPS da Oracle Cloud Infrastructure (OCI).
+
+### Configurações de Deploy
+- Sistema Operacional base: **Ubuntu 22.04+**
+- IP Público: `164.152.247.168` (provisório)
+- Usuário de deploy: `ubuntu` (adicionado ao grupo `docker` para evitar necessidade de root no CI).
+
+### Setup de Firewall (Iptables & VCN)
+Para garantir o acesso HTTP/HTTPS foram realizadas liberações de portas em dois níveis:
+1. **Firewall Interno (Ubuntu):**
+   ```bash
+   sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+   sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+   sudo netfilter-persistent save
+   ```
+2. **Oracle VCN (Virtual Cloud Network):**
+   Liberação de Ingress Rules (Ports 80/443) na *Default Security List* através do painel OCI.
 
 ---
 
