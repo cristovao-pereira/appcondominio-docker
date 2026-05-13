@@ -29,3 +29,6 @@ skills/
 # Codex/local artifacts
 .codex
 *.bak
+
+# Pasta de artefatos temporários do agente
+estagio/
