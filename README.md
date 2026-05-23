@@ -281,9 +281,11 @@ Para facilitar a integração com dashboards padrões do Grafana (como o *Node E
     ```bash
     scp -i ~/oracle/oracle.key infra/alloy/config.alloy ubuntu@164.152.247.168:/opt/condominio/infra/alloy/config.alloy
     ssh -i ~/oracle/oracle.key ubuntu@164.152.247.168 "sudo docker restart appcondominio-alloy"
-    ```
+
+    <img width="1887" height="917" alt="grafana" src="https://github.com/user-attachments/assets/01a5733a-7308-4095-9091-3456bf6fe0c5" />
+
 ---
-<img width="1751" height="926" alt="grafana" src="https://github.com/user-attachments/assets/074caa74-c4ea-4eb8-a2be-c6e90229fd17" />
+
 
 
 ## 📖 Documentação
