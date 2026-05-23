@@ -48,13 +48,14 @@ Sistema robusto de **gestão de portaria condominial** com módulos de controle 
 
 ## ⚙️ Stack Tecnológica
 
-| Camada        | Tecnologia                                    |
-|---------------|-----------------------------------------------|
-| **Frontend**  | Next.js 16 · React 19 · TypeScript · Tailwind |
-| **Backend**   | NestJS 11 · TypeScript                         |
-| **Banco**     | PostgreSQL 16                                 |
-| **Infra**     | Docker Compose · Nginx · GHCR                 |
-| **CI/CD**     | GitHub Actions · Deploy automatizado para VPS |
+| Camada            | Tecnologia                                    |
+|-------------------|-----------------------------------------------|
+| **Frontend**      | Next.js 16 · React 19 · TypeScript · Tailwind |
+| **Backend**       | NestJS 11 · TypeScript                         |
+| **Banco**         | PostgreSQL 16                                 |
+| **Infra**         | Docker Compose · Nginx · GHCR                 |
+| **CI/CD**         | GitHub Actions · Deploy automatizado para VPS |
+| **Monitoramento** | Grafana Cloud · Grafana Alloy                 |
 
 ---
 
@@ -82,6 +83,8 @@ appcondominio-docker/
 │       └── package.json
 │
 ├── infra/
+│   ├── alloy/                # Configuração do agente de monitoramento
+│   │   └── config.alloy      # Configuração River do Grafana Alloy
 │   ├── nginx/                # Configuração do reverse proxy
 │   │   ├── nginx.conf
 │   │   └── conf.d/
@@ -237,6 +240,50 @@ Para garantir o acesso HTTP/HTTPS foram realizadas liberações de portas em doi
 
 ---
 
+## 📊 Observabilidade e Monitoramento (Grafana Cloud)
+
+O sistema possui uma infraestrutura de observabilidade integrada com o **Grafana Cloud** utilizando o **Grafana Alloy** como agente coletor de telemetria leve. Esta abordagem consome pouquíssimo recurso (~15-20MB de RAM), sendo ideal para o limite da VPS Oracle Always Free.
+
+### Componentes de Monitoramento
+
+1. **Grafana Alloy**: Agente que roda em container no Docker Compose de produção. Ele lê a configuração River em [config.alloy](file:///home/cris/appcondominio-docker/infra/alloy/config.alloy), coleta as métricas locais e faz o *remote write* (envio remoto) seguro via HTTPS para a API do Grafana Cloud.
+2. **Unix Exporter (Host Metrics)**: Coleta métricas de CPU, uso de RAM, uso de disco, tráfego de rede (coletor `netstat` ativo) e pressão de recursos de CPU/I/O (coletor `pressure` via PSI do kernel Linux).
+3. **cAdvisor (Container Metrics)**: Coleta métricas de consumo individual de cada container Docker em tempo real. Configurado com `docker_only = true` para evitar dependências com o socket do containerd que não está exposto.
+
+### Variáveis de Ambiente Necessárias (.env)
+
+Para habilitar a observabilidade em produção, preencha as credenciais obtidas no painel do Grafana Cloud:
+
+```bash
+GRAFANA_CLOUD_PROMETHEUS_URL=https://prometheus-prod-xxx.grafana.net/api/prom/push
+GRAFANA_CLOUD_PROMETHEUS_USER=seu_user_id
+GRAFANA_CLOUD_API_KEY=glc_seu_token_de_acesso
+```
+
+### Configurações de Redirecionamento e Labels
+
+Para facilitar a integração com dashboards padrões do Grafana (como o *Node Exporter Full* e *cAdvisor*), o Alloy reescreve as labels das métricas injetando:
+- **`job`**: `integrations/node_exporter` (para métricas do host) e `integrations/cadvisor` (para métricas de containers).
+- **`instance`**: O hostname real da máquina virtual (injetado dinamicamente usando `constants.hostname`).
+
+### Comandos de Operação e Diagnóstico
+
+*   **Verificar logs do coletor:**
+    ```bash
+    docker logs appcondominio-alloy
+    ```
+*   **Reiniciar o Alloy após mudança de configuração:**
+    ```bash
+    docker restart appcondominio-alloy
+    ```
+*   **Atualizar a configuração no servidor manualmente (SCP):**
+    ```bash
+    scp -i ~/oracle/oracle.key infra/alloy/config.alloy ubuntu@164.152.247.168:/opt/condominio/infra/alloy/config.alloy
+    ssh -i ~/oracle/oracle.key ubuntu@164.152.247.168 "sudo docker restart appcondominio-alloy"
+    ```
+
+---
+
 ## 📖 Documentação
 
 | Documento                                                      | Descrição                                |
@@ -258,6 +305,8 @@ Para garantir o acesso HTTP/HTTPS foram realizadas liberações de portas em doi
 | Erro de pull no GHCR                  | Valide login do Docker no registry e permissões do token |
 | Nginx reiniciando por certificado     | Use `npm run prod:http:up` para teste local sem SSL   |
 | `404` em `/api/health` no localhost   | Verifique se o modo HTTP está ativo (`npm run prod:http:up`) |
+| Métricas vazias no Grafana Cloud      | Valide as chaves do Grafana no `.env` e verifique os logs com `docker logs appcondominio-alloy` |
+| Painel "CPU Frequency" sem dados      | Limitação física de VMs em nuvem (coletor cpufreq indisponível em instâncias virtualizadas) |
 
 ---
 
