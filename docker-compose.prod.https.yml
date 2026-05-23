@@ -64,6 +64,7 @@ services:
   alloy:
     image: grafana/alloy:latest
     container_name: appcondominio-alloy
+    user: root
     restart: unless-stopped
     volumes:
       - ./infra/alloy/config.alloy:/etc/alloy/config.alloy:ro
