@@ -76,6 +76,8 @@ services:
       - GRAFANA_CLOUD_PROMETHEUS_URL=${GRAFANA_CLOUD_PROMETHEUS_URL}
       - GRAFANA_CLOUD_PROMETHEUS_USER=${GRAFANA_CLOUD_PROMETHEUS_USER}
       - GRAFANA_CLOUD_API_KEY=${GRAFANA_CLOUD_API_KEY}
+      # Desabilita backend containerd do cAdvisor (servidor usa Docker puro)
+      - CADVISOR_METRICS_DISABLE=advtcp,cpuLoad,hugetlb,memory_numa,referenced_memory,resctrl,sched,tcp,udp
     command: run --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
 
 volumes:

@@ -1,55 +1,56 @@
 // Coleta de métricas do sistema host (equivalente ao Node Exporter)
 prometheus.exporter.unix "host" {
+  enable_collectors = ["netstat", "pressure"]
 }
 
-// Coleta de métricas dos containers Docker locais
+// Coleta de métricas dos containers Docker
+// docker_only=true desabilita a tentativa de conectar ao containerd.sock
 prometheus.exporter.cadvisor "docker" {
   docker_host = "unix:///var/run/docker.sock"
+  docker_only = true
 }
 
+// Injeta labels corretas nos targets do host
 discovery.relabel "host" {
   targets = prometheus.exporter.unix.host.targets
   rule {
     target_label = "job"
-    replacement  = "node"
+    replacement  = "integrations/node_exporter"
   }
   rule {
     target_label = "instance"
-    replacement  = "appcondominio-server"
-  }
-  rule {
-    target_label = "nodename"
-    replacement  = "appcondominio-server"
+    replacement  = constants.hostname
   }
 }
 
+// Injeta labels corretas nos targets do cAdvisor
 discovery.relabel "docker" {
   targets = prometheus.exporter.cadvisor.docker.targets
   rule {
     target_label = "job"
-    replacement  = "cadvisor"
+    replacement  = "integrations/cadvisor"
   }
   rule {
     target_label = "instance"
-    replacement  = "appcondominio-server"
+    replacement  = constants.hostname
   }
 }
 
-// Agrupamento e raspagem das métricas do Host
+// Raspagem das métricas do Host
 prometheus.scrape "host_metrics" {
   targets    = discovery.relabel.host.output
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
-  job_name   = "node"
+  scrape_interval = "60s"
 }
 
-// Agrupamento e raspagem das métricas dos Containers
+// Raspagem das métricas dos Containers
 prometheus.scrape "docker_metrics" {
   targets    = discovery.relabel.docker.output
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
-  job_name   = "cadvisor"
+  scrape_interval = "60s"
 }
 
-// Envio remoto seguro para o Grafana Cloud
+// Envio remoto para o Grafana Cloud
 prometheus.remote_write "grafana_cloud" {
   endpoint {
     url = sys.env("GRAFANA_CLOUD_PROMETHEUS_URL")
