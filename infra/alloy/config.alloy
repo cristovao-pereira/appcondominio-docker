@@ -1,0 +1,33 @@
+// Coleta de métricas do sistema host (equivalente ao Node Exporter)
+prometheus.exporter.unix "host" {
+  set_collectors = ["cpu", "meminfo", "diskstats", "filesystem", "netdev"]
+}
+
+// Coleta de métricas dos containers Docker locais
+prometheus.exporter.cadvisor "docker" {
+  docker_host = "unix:///var/run/docker.sock"
+}
+
+// Agrupamento e raspagem das métricas do Host
+prometheus.scrape "host_metrics" {
+  targets    = prometheus.exporter.unix.host.targets
+  forward_to = [prometheus.remote_write.grafana_cloud.receiver]
+}
+
+// Agrupamento e raspagem das métricas dos Containers
+prometheus.scrape "docker_metrics" {
+  targets    = prometheus.exporter.cadvisor.docker.targets
+  forward_to = [prometheus.remote_write.grafana_cloud.receiver]
+}
+
+// Envio remoto seguro para o Grafana Cloud
+prometheus.remote_write "grafana_cloud" {
+  endpoint {
+    url = sys.env("GRAFANA_CLOUD_PROMETHEUS_URL")
+
+    basic_auth {
+      username = sys.env("GRAFANA_CLOUD_PROMETHEUS_USER")
+      password = sys.env("GRAFANA_CLOUD_API_KEY")
+    }
+  }
+}
