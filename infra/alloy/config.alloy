@@ -1,6 +1,5 @@
 // Coleta de métricas do sistema host (equivalente ao Node Exporter)
 prometheus.exporter.unix "host" {
-  set_collectors = ["cpu", "meminfo", "diskstats", "filesystem", "netdev"]
 }
 
 // Coleta de métricas dos containers Docker locais
