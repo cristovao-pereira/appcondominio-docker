@@ -102,5 +102,14 @@ jobs:
             docker compose -f docker-compose.yml -f docker-compose.prod.yml pull web backend
             docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-build --remove-orphans
 
+            echo "==> Aguardando 5 segundos para a inicialização dos serviços..."
+            sleep 5
+
+            echo "==> Status atual dos containers em produção:"
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml ps
+
+            echo "==> Logs do container de backend (NestJS) para diagnóstico:"
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml logs --tail=100 backend
+
             # Remove imagens antigas (economiza espaço em disco)
             docker image prune -f
