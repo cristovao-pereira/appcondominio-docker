@@ -215,7 +215,20 @@ Push na branch 'main' → GitHub Actions
 - **Trigger:** Automático em push na branch `main` e disparo manual (`workflow_dispatch`).
 - **Compatibilidade:** Uso forçado do Node.js 24 (`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`) para evitar *warnings* de depreciação das actions (checkout, docker-login, etc).
 - **Segurança:** As chaves de acesso (`VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`) ficam armazenadas nos **GitHub Secrets**.
-- O arquivo `.env.prod` fica alocado apenas na VPS (e não no repositório), sendo carregado pelo Compose automaticamente na inicialização.
+---
+
+## 🛡️ Defesas Ativas de Segurança
+
+O sistema possui defesas ativas implementadas em conformidade com as principais diretrizes de segurança da **OWASP**:
+
+- **Prevenção contra SQL Injection (SQLi):** Consultas 100% parametrizadas (Prepared Statements) gerenciadas pelo **Prisma v7** com o adaptador `@prisma/adapter-pg` e pooling nativo.
+- **Prevenção de Vazamento de Informações (CWE-209):** Filtro de exceção global no NestJS ([http-exception.filter.ts](apps/backend/src/common/filters/http-exception.filter.ts)) que intercepta erros do PostgreSQL e retorna respostas genéricas, ocultando o stack trace e estrutura interna de tabelas.
+- **Combate a Ataques de Força Bruta (Rate Limiting - CWE-307):** Controle de requisições por IP implementado com `@nestjs/throttler`. O login e o cadastro possuem regras estritas limitando a no máximo **5 tentativas por minuto** por IP.
+- **Trilha de Auditoria e Logs de Segurança:** Eventos críticos de autenticação (falhas e acessos bem-sucedidos) são salvos de forma indexada na tabela `security_audit_logs` no PostgreSQL para rastreabilidade.
+- **Validação de Inputs e Proteção contra XSS (CWE-79):** Sanitização e filtragem estrita de tags HTML e scripts em campos abertos usando `class-validator` e `ValidationPipe` global com Whitelist de payloads no NestJS.
+- **Segurança de Navegação e Senhas Fortes:** Formulários de autenticação usam tags `autocomplete` para gerenciamento seguro e a tela de perfil conta com validação interativa de força de senha para assegurar credenciais robustas.
+
+> 📝 **Walkthrough Completo:** Para ver os comandos de teste de penetração simulados e logs detalhados de validação, consulte o [Walkthrough de Defesa Ativa](docs/Defesa-ativa-de-segurança.md).
 
 ---
 
@@ -292,6 +305,7 @@ Para facilitar a integração com dashboards padrões do Grafana (como o *Node E
 
 | Documento                                                      | Descrição                                |
 |---------------------------------------------------------------|------------------------------------------|
+| [Defesa Ativa de Segurança](docs/Defesa-ativa-de-segurança.md) | Relatório de testes de penetração e defesas OWASP |
 | [Arquitetura Técnica Recomendada](docs/Arquitetura-Tecnica-Recomendada.md) | Visão técnica da arquitetura |
 | [Modelagem do Banco de Dados](docs/Modelagem-Banco-de-Dados.md)     | Diagrama ER e schema SQL             |
 | [Api.md](docs/Api.md)                                         | Endpoints da API REST                   |
