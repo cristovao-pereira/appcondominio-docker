@@ -116,9 +116,10 @@ export default function SuportePage() {
   };
 
   // Registra novo chamado técnico
-  const handleOpenTicket = (e: React.FormEvent) => {
+  const handleOpenTicket = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget as HTMLFormElement);
+    const formElement = e.currentTarget as HTMLFormElement;
+    const data = new FormData(formElement);
     const subject = (data.get("subject") as string).trim();
     const category = data.get("category") as string;
     const priority = data.get("priority") as "low" | "medium" | "high";
@@ -129,24 +130,52 @@ export default function SuportePage() {
       return;
     }
 
-    const randomProtocol = `TK-${Math.floor(Math.random() * 9000) + 1000}`;
-    const nowTime = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    try {
+      const response = await fetch("http://localhost:3001/api/support", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "Operador de Portaria",
+          email: "portaria@obsidian-residences.com",
+          subject,
+          message: description,
+        }),
+      });
 
-    const newTicket: SupportTicket = {
-      id: `tk_${Date.now()}`,
-      subject,
-      category,
-      priority,
-      description,
-      status: "open",
-      protocol: randomProtocol,
-      timestamp: `Hoje, ${nowTime}`,
-      eta: priority === "high" ? "15 minutos" : priority === "medium" ? "1 hora" : "4 horas",
-    };
+      const resData = await response.json();
 
-    setTickets([newTicket, ...tickets]);
-    showToast(`Chamado ${randomProtocol} aberto com sucesso!`);
-    (e.currentTarget as HTMLFormElement).reset();
+      if (!response.ok) {
+        if (response.status === 429) {
+          showToast("Múltiplos chamados detectados. Por favor, aguarde 1 minuto.");
+          return;
+        }
+        showToast(resData.message || "Erro ao abrir chamado.");
+        return;
+      }
+
+      const randomProtocol = `TK-${Math.floor(Math.random() * 9000) + 1000}`;
+      const nowTime = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+      const newTicket: SupportTicket = {
+        id: resData.id || `tk_${Date.now()}`,
+        subject,
+        category,
+        priority,
+        description: description,
+        status: "open",
+        protocol: randomProtocol,
+        timestamp: `Hoje, ${nowTime}`,
+        eta: priority === "high" ? "15 minutos" : priority === "medium" ? "1 hora" : "4 horas",
+      };
+
+      setTickets([newTicket, ...tickets]);
+      showToast(`Chamado ${randomProtocol} aberto com sucesso!`);
+      formElement.reset();
+    } catch (err) {
+      showToast("Erro de conexão ao enviar o chamado de suporte.");
+    }
   };
 
   // FAQs estruturados para portaria

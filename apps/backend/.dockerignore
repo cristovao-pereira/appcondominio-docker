@@ -8,3 +8,5 @@ README.md
 Dockerfile
 .dockerignore
 npm-debug.log*
+*.tsbuildinfo
+tsconfig.build.tsbuildinfo

@@ -57,6 +57,46 @@ export default function MoradoresPage() {
     setResidents(mockResidents);
   }, []);
 
+  // Busca em tempo real no banco de dados PostgreSQL do backend (segura contra SQL Injection)
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (!search.trim()) {
+        setResidents(mockResidents);
+        return;
+      }
+      
+      try {
+        const response = await fetch(`http://localhost:3001/api/support/search?q=${encodeURIComponent(search)}`);
+        if (response.ok) {
+          const data = await response.json();
+          // Converte do formato do backend para o formato do Resident do frontend
+          const mappedResidents: Resident[] = data.map((u: any) => ({
+            id: u.id,
+            name: u.name,
+            email: u.email,
+            unit: "402", // placeholder para fins de compatibilidade visual
+            block: "Bloco A",
+            company: u.role === "admin" ? "Administrador (Banco)" : "Morador (Banco)",
+            contact: "—",
+            vip: u.role === "admin",
+            status: "active",
+          }));
+          
+          setResidents(mappedResidents);
+        }
+      } catch (err) {
+        console.error("Erro ao buscar moradores no banco real:", err);
+      }
+    };
+
+    // Adiciona debouncer simples de 300ms para evitar sobrecarga
+    const delayDebounce = setTimeout(() => {
+      fetchSearchResults();
+    }, 300);
+
+    return () => clearTimeout(delayDebounce);
+  }, [search]);
+
   // Fecha alertas automaticamente
   useEffect(() => {
     if (alert) {
@@ -65,39 +105,63 @@ export default function MoradoresPage() {
     }
   }, [alert]);
 
-  // Função para cadastrar novo morador
-  const handleAddResident = (e: React.FormEvent) => {
+  // Função para cadastrar novo morador no banco real
+  const handleAddResident = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!newName.trim() || !newUnit.trim() || !newContact.trim()) {
-      setAlert({ type: "error", message: "Nome, Unidade e Contato são campos obrigatórios." });
+    if (!newName.trim() || !newUnit.trim() || !newContact.trim() || !newEmail.trim()) {
+      setAlert({ type: "error", message: "Nome, Unidade, Contato e E-mail são obrigatórios para a integração." });
       return;
     }
 
-    const initials = newName
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: newName,
+          email: newEmail,
+          password: "Password@123", // Senha temporária compatível com a regex de força de senha
+          role: "resident",
+        }),
+      });
 
-    const newResident: Resident = {
-      id: `r_${Date.now()}`,
-      name: newName,
-      initials: initials,
-      unit: newUnit,
-      block: newBlock,
-      company: newCompany || "Autônomo / Particular",
-      contact: newContact,
-      email: newEmail || undefined,
-      vip: newVip,
-      status: newStatus,
-    };
+      const resData = await response.json();
 
-    setResidents([newResident, ...residents]);
-    setShowAddModal(false);
-    resetForm();
-    setAlert({ type: "success", message: `Morador ${newName} cadastrado com sucesso!` });
+      if (!response.ok) {
+        setAlert({ type: "error", message: resData.message || "Erro ao cadastrar morador." });
+        return;
+      }
+
+      const initials = newName
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+
+      const newResident: Resident = {
+        id: resData.id || `r_${Date.now()}`,
+        name: newName,
+        initials: initials,
+        unit: newUnit,
+        block: newBlock,
+        company: newCompany || "Morador Cadastrado",
+        contact: newContact,
+        email: newEmail,
+        vip: newVip,
+        status: newStatus,
+      };
+
+      setResidents([newResident, ...residents]);
+      setShowAddModal(false);
+      resetForm();
+      setAlert({ type: "success", message: `Morador ${newName} cadastrado no PostgreSQL com sucesso!` });
+    } catch (err) {
+      setAlert({ type: "error", message: "Erro de conexão ao salvar morador no servidor de banco de dados." });
+    }
   };
 
   // Alternar Status do Morador selecionado

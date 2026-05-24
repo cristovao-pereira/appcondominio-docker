@@ -17,5 +17,8 @@
     "start": "npm run start --prefix apps/web",
     "lint": "npm run lint --prefix apps/web",
     "mcp:oracle:config": "node ./scripts/generate-mcp-oracle-config.mjs"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
   }
 }

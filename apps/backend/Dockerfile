@@ -13,6 +13,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Gera o Prisma Client necessário para a compilação do TypeScript
+RUN npx prisma generate
+
 RUN npm run build
 
 # Stage 3: Production runtime

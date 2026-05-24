@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("resident")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model SupportContact {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("support_contacts")
+}
+
+model SecurityAuditLog {
+  id        String   @id @default(uuid())
+  ip        String
+  event     String
+  username  String?
+  details   String?
+  createdAt DateTime @default(now())
+
+  @@map("security_audit_logs")
+}
