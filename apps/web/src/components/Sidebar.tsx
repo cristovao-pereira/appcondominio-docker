@@ -54,28 +54,27 @@ export function Sidebar() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-screen w-64 flex flex-col z-50 border-r border-[#424754]/40"
-      style={{ background: "#0b1326" }}
+      className="fixed left-0 top-0 h-screen w-64 flex flex-col z-50 border-r border-sidebar-border bg-sidebar transition-colors duration-300"
     >
       {/* Header */}
-      <div className="px-6 pt-8 pb-6 border-b border-[#424754]/30">
-        <p className="text-xs font-bold tracking-[0.2em] text-[#adc6ff]/60 uppercase mb-1">
+      <div className="px-6 pt-8 pb-6 border-b border-sidebar-border">
+        <p className="text-xs font-bold tracking-[0.2em] text-sidebar-primary/60 uppercase mb-1">
           Concierge OS
         </p>
         <h1
-          className="text-lg font-extrabold tracking-tight text-[#dae2fd]"
+          className="text-lg font-extrabold tracking-tight text-sidebar-foreground"
           style={{ fontFamily: "var(--font-manrope)" }}
         >
           THE OBSIDIAN
         </h1>
-        <p className="text-[11px] text-[#8c909f] mt-1">Unit 402 Concierge</p>
+        <p className="text-[11px] text-sidebar-foreground/60 mt-1">Unit 402 Concierge</p>
       </div>
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         {navGroups.map((group) => (
           <div key={group.label} className="mb-4">
-            <p className="text-[10px] font-bold tracking-[0.18em] text-[#8c909f]/70 uppercase px-3 mb-2">
+            <p className="text-[10px] font-bold tracking-[0.18em] text-sidebar-foreground/50 uppercase px-3 mb-2">
               {group.label}
             </p>
             {group.items.map(({ href, label, icon: Icon }) => {
@@ -89,17 +88,17 @@ export function Sidebar() {
                     transition-all duration-200 group relative
                     ${
                       active
-                        ? "text-[#adc6ff] bg-[#adc6ff]/8"
-                        : "text-[#8c909f] hover:text-[#dae2fd] hover:bg-[#222a3d]"
+                        ? "text-sidebar-primary bg-sidebar-primary/10"
+                        : "text-sidebar-foreground/75 hover:text-sidebar-foreground hover:bg-sidebar-accent"
                     }
                   `}
                 >
                   {active && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#adc6ff] rounded-r-full" />
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-sidebar-primary rounded-r-full" />
                   )}
                   <Icon
                     size={16}
-                    className={active ? "text-[#adc6ff]" : "text-[#8c909f] group-hover:text-[#c2c6d6]"}
+                    className={active ? "text-sidebar-primary" : "text-sidebar-foreground/60 group-hover:text-sidebar-foreground"}
                   />
                   {label}
                 </Link>
@@ -110,21 +109,24 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-3 pb-6 border-t border-[#424754]/30 pt-4">
+      <div className="px-3 pb-6 border-t border-sidebar-border pt-4">
         <button
           onClick={() => router.push("/perfil")}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#8c909f] hover:text-[#dae2fd] hover:bg-[#222a3d] transition-all duration-200 mb-1"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-sidebar-foreground/75 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-200 mb-1"
         >
           <User size={16} />
           Meu Perfil
         </button>
-        <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#8c909f] hover:text-[#dae2fd] hover:bg-[#222a3d] transition-all duration-200 mb-1">
+        <button
+          onClick={() => router.push("/suporte")}
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-sidebar-foreground/75 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-200 mb-1"
+        >
           <HelpCircle size={16} />
-          Support
+          Suporte
         </button>
         <button
           onClick={() => router.push("/login")}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#ffb4ab]/70 hover:text-[#ffb4ab] hover:bg-[#ffb4ab]/8 transition-all duration-200"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-all duration-200"
         >
           <LogOut size={16} />
           Logout

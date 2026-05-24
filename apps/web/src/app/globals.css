@@ -64,6 +64,66 @@
 }
 
 :root {
+  /* === Concierge OS / Light Premium Design System === */
+  /* Surfaces */
+  --surface: #f4f6fa;
+  --surface-dim: #eaedf5;
+  --surface-bright: #ffffff;
+  --surface-container-low: #f8fafc;
+  --surface-container: #ffffff;
+  --surface-container-high: #f1f5f9;
+  --surface-container-highest: #e2e8f0;
+  /* Primary palette */
+  --primary-container: #2563eb;
+  --on-primary: #ffffff;
+  --on-primary-container: #1e293b;
+  /* Content colors */
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --outline: #94a3b8;
+  --outline-variant: #cbd5e1;
+  /* Semantic */
+  --tertiary: #d97706;
+  --tertiary-container: #fef3c7;
+  --on-tertiary-container: #78350f;
+  /* === Shadcn variables mapped to Concierge OS palette === */
+  --background: #f4f6fa;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #475569;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #f1f5f9;
+  --ring: #2563eb;
+  --chart-1: #2563eb;
+  --chart-2: #3b82f6;
+  --chart-3: #60a5fa;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --radius: 0.625rem;
+  
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #2563eb;
+}
+
+.dark {
   /* === Concierge OS / Midnight Slate Design System === */
   /* Surfaces */
   --surface: #0b1326;
@@ -112,6 +172,7 @@
   --chart-4: #ffb786;
   --chart-5: #ffb4ab;
   --radius: 0.625rem;
+  
   --sidebar: #0b1326;
   --sidebar-foreground: #dae2fd;
   --sidebar-primary: #adc6ff;

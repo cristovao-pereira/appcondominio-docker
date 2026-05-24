@@ -46,24 +46,28 @@ export const mockVisitors: Visitor[] = [
   {
     id: "v1", name: "Alessandro Moretti", document: "ID-98234-X", nationality: "Italy",
     type: "guest", lastVisit: "Oct 24, 2023 • 14:27 PM", unitVisited: "Penthouse A",
+    hostUnit: "Penthouse A", hostResident: "Julian Thorne", visitCount: 2,
     visitHistory: [{ date: "Oct 24, 2023", unit: "Penthouse A" }, { date: "Sep 12, 2023", unit: "Penthouse A" }],
     status: "active", initials: "AM",
   },
   {
     id: "v2", name: "Julianne Smith", document: "ID-11002-L", nationality: "USA",
     type: "frequent_guest", lastVisit: "Oct 25, 2023 • 09:15 AM", unitVisited: "1204",
+    hostUnit: "Unit 1204", hostResident: "Marcus Holloway", visitCount: 14,
     visitHistory: [{ date: "Oct 25, 2023", unit: "Unit 1204" }, { date: "Oct 22, 2023", unit: "Unit 1204" }, { date: "Oct 19, 2023", unit: "Unit 1204" }],
     status: "frequent", initials: "JS",
   },
   {
     id: "v3", name: "Robert Miller", document: "TX-44512-9", nationality: "USA",
     type: "service", lastVisit: "Oct 23, 2023 • 11:00 AM", unitVisited: "802",
+    hostUnit: "Unit 802", hostResident: "Evelyn Sterling", visitCount: 1,
     visitHistory: [{ date: "Oct 23, 2023", unit: "Unit 802" }],
     status: "active", initials: "RM",
   },
   {
     id: "v4", name: "Elena Huang", document: "ID-77281-W", nationality: "Canada",
     type: "guest", lastVisit: "Oct 21, 2023 • 18:45 PM", unitVisited: "1402",
+    hostUnit: "Unit 1402", hostResident: "Julianne DeSilva", visitCount: 3,
     visitHistory: [{ date: "Oct 21, 2023", unit: "Unit 1402" }],
     status: "active", initials: "EH",
   },
@@ -72,20 +76,20 @@ export const mockVisitors: Visitor[] = [
 // ─── Authorizations ───────────────────────────────────────────────────────────
 
 export const mockAuthorizations: Authorization[] = [
-  { id: "a1", visitorName: "Elena Rodriguez", visitorInitials: "ER", unit: "Unit 402", scheduledFor: "14:30 Today", status: "pending", type: "guest" },
-  { id: "a2", visitorName: "Amazon Logistics", visitorInitials: "AL", unit: "Service Entrance", entryTime: "11:15 AM", status: "approved", type: "delivery" },
-  { id: "a3", visitorName: "Julian Vane", visitorInitials: "JV", unit: "Unit 1005", status: "refused", type: "guest", reason: "Security Flag: Unverified ID" },
-  { id: "a4", visitorName: "Marcus Thorne", visitorInitials: "MT", unit: "Penthouse A", scheduledFor: "13:00 Today", status: "pending", type: "maintenance" },
-  { id: "a5", visitorName: "Sarah Jenkins", visitorInitials: "SJ", unit: "Unit 2201", scheduledFor: "09:00 Today", status: "approved", type: "guest" },
-  { id: "a6", visitorName: "FedEx Express", visitorInitials: "FE", unit: "PH-1202", entryTime: "14:22", status: "approved", type: "delivery" },
+  { id: "a1", visitorName: "Elena Rodriguez", visitorInitials: "ER", unit: "Unit 402", hostUnit: "402", hostResident: "Alexandra Vance", visitDate: "Hoje", visitTime: "14:30", authorizedBy: "Alexandra Vance", purpose: "Visita social e entrega de portfólio", status: "pending", type: "guest", visitorCompany: "Vance Design Group" },
+  { id: "a2", visitorName: "Amazon Logistics", visitorInitials: "AL", unit: "Service Entrance", hostUnit: "Portaria", hostResident: "Condomínio", visitDate: "Hoje", visitTime: "11:15 AM", authorizedBy: "Síndico", purpose: "Entrega de mercadorias diversas", status: "approved", type: "delivery", visitorCompany: "Amazon" },
+  { id: "a3", visitorName: "Julian Vane", visitorInitials: "JV", unit: "Unit 1005", hostUnit: "1005", hostResident: "Julian Vane", visitDate: "Ontem", visitTime: "10:00", authorizedBy: "Ninguém", purpose: "Visita cancelada por divergência de documento", status: "refused", type: "guest", reason: "Flag de Segurança: Documento não verificado", visitorCompany: "Vane Partners" },
+  { id: "a4", visitorName: "Marcus Thorne", visitorInitials: "MT", unit: "Penthouse A", hostUnit: "Cobertura A", hostResident: "Julian Thorne", visitDate: "Hoje", visitTime: "13:00", authorizedBy: "Julian Thorne", purpose: "Manutenção e limpeza preventiva de ar condicionado", status: "pending", type: "maintenance", visitorCompany: "Thorne HVAC" },
+  { id: "a5", visitorName: "Sarah Jenkins", visitorInitials: "SJ", unit: "Unit 2201", hostUnit: "2201", hostResident: "Sarah Jenkins", visitDate: "Hoje", visitTime: "09:00", authorizedBy: "Sarah Jenkins", purpose: "Visita familiar", status: "approved", type: "guest", visitorCompany: "Jenkins Inc" },
+  { id: "a6", visitorName: "FedEx Express", visitorInitials: "FE", unit: "PH-1202", hostUnit: "1202-PH", hostResident: "Residente Marks", visitDate: "Hoje", visitTime: "14:22", authorizedBy: "Marks", purpose: "Entrega de documento prioritário", status: "approved", type: "delivery", visitorCompany: "FedEx" },
 ];
 
 // ─── Active Visits (Portaria) ─────────────────────────────────────────────────
 
 export const mockActiveVisits: ActiveVisit[] = [
-  { id: "av1", name: "Marcus Thompson", type: "guest", unit: "Unit 805", timeIn: "13:12", elapsed: "1h 12m", deviceId: "OBX-9942" },
-  { id: "av2", name: "TechServ Solutions", type: "maintenance", unit: "ROOF", timeIn: "13:39", elapsed: "0h 45m", deviceId: "OBX-8721" },
-  { id: "av3", name: "Amazon Prime", type: "delivery", unit: "LOBBY", timeIn: "14:20", elapsed: "0h 04m" },
+  { id: "av1", name: "Marcus Thompson", visitorName: "Marcus Thompson", initials: "MT", type: "guest", unit: "Unit 805", hostUnit: "805", timeIn: "13:12", checkInTime: "13:12", elapsed: "1h 12m", deviceId: "OBX-9942", location: "Salão de Jogos" },
+  { id: "av2", name: "TechServ Solutions", visitorName: "TechServ Solutions", initials: "TS", type: "maintenance", unit: "ROOF", hostUnit: "ROOF", timeIn: "13:39", checkInTime: "13:39", elapsed: "0h 45m", deviceId: "OBX-8721", location: "Cobertura (Lajes)" },
+  { id: "av3", name: "Amazon Prime", visitorName: "Amazon Prime", initials: "AP", type: "delivery", unit: "LOBBY", hostUnit: "LOBBY", timeIn: "14:20", checkInTime: "14:20", elapsed: "0h 04m", location: "Hall de Entrada" },
 ];
 
 // ─── GPS Devices ──────────────────────────────────────────────────────────────
