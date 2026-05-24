@@ -108,6 +108,9 @@ jobs:
             echo "==> Status atual dos containers em produção:"
             docker compose -f docker-compose.yml -f docker-compose.prod.yml ps
 
+            echo "==> Reiniciando o Nginx para atualizar cache de DNS..."
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml restart nginx
+
             echo "==> Logs do container de backend (NestJS) para diagnóstico:"
             docker compose -f docker-compose.yml -f docker-compose.prod.yml logs --tail=100 backend
 
