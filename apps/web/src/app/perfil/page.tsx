@@ -41,7 +41,27 @@ export default function PerfilPage() {
   
   // PIN de Coação e Senha
   const [coercionPin, setCoercionPin] = useState("9999");
-  const [password, setPassword] = useState("••••••••••••");
+  const [password, setPassword] = useState("");
+  const [showPasswordHints, setShowPasswordHints] = useState(false);
+
+  // Calcula força da senha em tempo real
+  const passwordChecks = {
+    length: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /[0-9]/.test(password),
+    special: /[@$!%*?&]/.test(password),
+  };
+  const passwordStrength = Object.values(passwordChecks).filter(Boolean).length;
+  const strengthLabel = ["Muito fraca", "Fraca", "Razoável", "Boa", "Forte", "Forte"][passwordStrength];
+  const strengthColor = [
+    "bg-red-500",
+    "bg-orange-500",
+    "bg-amber-400",
+    "bg-yellow-400",
+    "bg-emerald-500",
+    "bg-emerald-500",
+  ][passwordStrength];
   
   // Preferências de som
   const [soundAlerts, setSoundAlerts] = useState({
@@ -377,23 +397,92 @@ export default function PerfilPage() {
               Configurações críticas de segurança física. O **PIN de Coação** é uma senha secreta para uso sob coação física de invasores. Digitar este PIN em qualquer terminal de liberação desbloqueará a fechadura normalmente, mas gerará um chamado de pânico silencioso e discreto para a polícia.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div className="space-y-4 mb-5">
+              {/* Senha do Terminal — largura total para acomodar indicador */}
               <div>
                 <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1.5">
-                  Senha do Terminal (Acesso)
+                  Nova Senha do Terminal (Acesso)
                 </label>
                 <div className="relative">
                   <Key size={13} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
                   <input
                     type="password"
+                    id="profile-password"
+                    autoComplete="new-password"
+                    placeholder="Digite uma nova senha..."
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => { setPassword(e.target.value); setShowPasswordHints(true); }}
+                    onFocus={() => setShowPasswordHints(true)}
                     className="w-full pl-9 pr-4 py-2 text-xs bg-background border border-border rounded-xl text-foreground focus:outline-none focus:border-primary/50 transition-colors"
                   />
                 </div>
+
+                {/* Indicador de Força de Senha */}
+                {showPasswordHints && (
+                  <div className="mt-2.5 space-y-2">
+                    {/* Barras de força */}
+                    <div className="flex gap-1">
+                      {[1, 2, 3, 4, 5].map((level) => (
+                        <div
+                          key={level}
+                          className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                            passwordStrength >= level ? strengthColor : "bg-border"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    {/* Label da força */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Força:
+                      </span>
+                      <span
+                        className={`text-[10px] font-extrabold uppercase tracking-wider transition-colors duration-200 ${
+                          passwordStrength <= 1 ? "text-red-500" :
+                          passwordStrength === 2 ? "text-orange-500" :
+                          passwordStrength === 3 ? "text-amber-400" :
+                          passwordStrength === 4 ? "text-yellow-400" :
+                          "text-emerald-500"
+                        }`}
+                      >
+                        {password.length === 0 ? "—" : strengthLabel}
+                      </span>
+                    </div>
+                    {/* Checklist de requisitos */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 bg-muted/40 border border-border rounded-xl p-3">
+                      {[
+                        { ok: passwordChecks.length, label: "Mínimo 8 caracteres" },
+                        { ok: passwordChecks.uppercase, label: "Letra maiúscula (A–Z)" },
+                        { ok: passwordChecks.lowercase, label: "Letra minúscula (a–z)" },
+                        { ok: passwordChecks.number, label: "Número (0–9)" },
+                        { ok: passwordChecks.special, label: "Caractere especial (@$!%*?&)" },
+                      ].map((req) => (
+                        <div key={req.label} className="flex items-center gap-2">
+                          <span
+                            className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0 transition-all duration-200 ${
+                              req.ok
+                                ? "bg-emerald-500/20 text-emerald-500 border border-emerald-500/40"
+                                : "bg-muted border border-border text-transparent"
+                            }`}
+                          >
+                            ✓
+                          </span>
+                          <span
+                            className={`text-[10px] transition-colors duration-200 ${
+                              req.ok ? "text-emerald-600 dark:text-emerald-400 font-semibold" : "text-muted-foreground"
+                            }`}
+                          >
+                            {req.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-              
-              <div>
+
+              {/* PIN de Coação */}
+              <div className="max-w-xs">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-orange-600 dark:text-orange-400 block mb-1.5">
                   PIN de Coação Silenciosa (4 dígitos)
                 </label>
@@ -409,6 +498,7 @@ export default function PerfilPage() {
                 </div>
               </div>
             </div>
+
 
             <button
               onClick={() => setIsTestPinOpen(true)}

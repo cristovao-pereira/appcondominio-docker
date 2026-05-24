@@ -80,6 +80,8 @@ export default function LoginPage() {
               />
               <input
                 type="email"
+                id="login-email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@obsidian-residences.com"
@@ -109,12 +111,14 @@ export default function LoginPage() {
               />
               <input
                 type="password"
+                id="login-password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
                 className="w-full bg-[#2a3347] border-none rounded-xl text-sm text-[#dae2fd] placeholder-[#8c909f]/60 pl-10 pr-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[#4d8eff]/40 focus:bg-[#222a3d] transition-all"
                 required
-                minLength={6}
+                minLength={8}
               />
             </div>
           </div>
