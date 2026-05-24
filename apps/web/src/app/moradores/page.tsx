@@ -29,6 +29,8 @@ const statusConfig: Record<Resident["status"], { label: string; color: string; b
   pending: { label: "PENDENTE", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500/10" },
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api';
+
 export default function MoradoresPage() {
   const router = useRouter();
 
@@ -66,7 +68,7 @@ export default function MoradoresPage() {
       }
       
       try {
-        const response = await fetch(`http://localhost:3001/api/support/search?q=${encodeURIComponent(search)}`);
+        const response = await fetch(`${API_URL}/support/search?q=${encodeURIComponent(search)}`);
         if (response.ok) {
           const data = await response.json();
           // Converte do formato do backend para o formato do Resident do frontend
@@ -115,7 +117,7 @@ export default function MoradoresPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/auth/register", {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -49,6 +49,8 @@ const statusConfig = {
   resolved: { label: "Encerrado", color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-500/10", dot: "bg-emerald-500" },
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api';
+
 export default function SuportePage() {
   // Diagnósticos de conexões da guarita
   const [diagnostics, setDiagnostics] = useState([
@@ -131,7 +133,7 @@ export default function SuportePage() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/support", {
+      const response = await fetch(`${API_URL}/support`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
