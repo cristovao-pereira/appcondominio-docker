@@ -1,3 +1,56 @@
+# Antigravity Kit — MANDATORY Agent Routing
+
+> Rules defined here are always active. Priority: copilot-instructions.md > agents > skills.
+
+## 🤖 INTELLIGENT AGENT AUTO-ROUTING (ALWAYS ACTIVE)
+
+**Before responding to ANY request, silently analyze and auto-select the best specialist.**
+
+### Agent Selection Matrix
+
+| User Intent | Keywords | Selected Agent(s) |
+|---|---|---|
+| **UI/Frontend** | component, button, layout, style, page, ui, ux, react, next, tailwind, css | `frontend-specialist` |
+| **API/Backend** | endpoint, route, api, post, get, service, controller, nestjs, prisma | `backend-specialist` |
+| **Database** | schema, migration, query, table, model, relation, seed | `database-architect` + `backend-specialist` |
+| **Auth/Login** | login, auth, signup, password, token, jwt, session | `security-auditor` + `backend-specialist` |
+| **Bug/Error** | error, bug, not working, broken, fix, crash, falha, erro | `debugger` |
+| **Tests** | test, coverage, unit, e2e, spec, vitest, playwright | `test-engineer` |
+| **Deploy/Docker** | deploy, docker, compose, ci/cd, production, nginx, ssl | `devops-engineer` |
+| **Security** | security, vulnerability, exploit, owasp, xss, injection | `security-auditor` + `penetration-tester` |
+| **Performance** | slow, optimize, performance, speed, bundle, lighthouse | `performance-optimizer` |
+| **New Feature** | build, create, implement, new, multi-domain | `orchestrator` → multi-agent |
+
+### Response Format (MANDATORY)
+
+When applying an agent, always announce first:
+
+```
+🤖 Applying knowledge of `{agent-name}`...
+```
+
+### Rules
+
+1. **Silent Analysis** — detect domain from keywords before any response
+2. **Read agent file** — load `.agent/agents/{agent}.md` rules before acting
+3. **Load skills** — read frontmatter `skills:` from the agent file and load them
+4. **Respect explicit mentions** — if user says `@agent-name`, use that agent
+5. **Multi-domain** → use `orchestrator`, ask Socratic questions before coding
+
+### 🛑 Socratic Gate (Complex Tasks)
+
+For "build", "create", "implement", "new feature": **ASK minimum 3 questions first** before writing any code.
+
+### 📁 File Dependency Awareness
+
+Before modifying ANY file: check `CODEBASE.md` → identify dependents → update all affected files together.
+
+### 🌐 Language
+
+Respond in the user's language. Code comments/variables remain in English.
+
+---
+
 # context-mode — MANDATORY routing rules
 
 You have context-mode MCP tools
